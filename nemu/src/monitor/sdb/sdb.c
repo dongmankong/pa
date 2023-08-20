@@ -60,7 +60,7 @@ static int cmd_si(char *args){
     char *arg0 = strtok(args, " ");
     printf("%s\n",args);
     execN=atoi(arg0);
-    printf("%d",execN);
+    printf("%d\n",execN);
   }
   cpu_exec(execN);
   return 0;
