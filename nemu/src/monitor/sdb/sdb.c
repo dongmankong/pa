@@ -88,9 +88,9 @@ static int cmd_x(char *args){
   if(args!=NULL){
     printf("%s\n",args);
     char *arg0 = strtok(args, " ");
-    char *arg1 = strtok(args, " ");
-    printf("%s %s",arg0,arg1);
-    
+    char *arg1 = strtok(NULL, " ");
+    printf("%s %s\n",arg0,arg1);
+
   }
 
   return 0;
