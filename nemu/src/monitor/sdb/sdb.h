@@ -18,7 +18,7 @@
 
 #include <common.h>
 
-#include <memory/paddr.h>
+#include <memory/vaddr.h>
 
 word_t expr(char *e, bool *success);
 
