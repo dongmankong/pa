@@ -70,7 +70,17 @@ static int cmd_info(char *args){
   if(args!=NULL){
     char *arg0 = strtok(args, " ");
     printf("%s\n",arg0);
+    if(strcmp(arg0,"r")==0){
+      isa_reg_display();
+    }else if(strcmp(arg0,"w")==0){
+      
+    }else{
+      printf("error args");
+    }
+  }else{
+    isa_reg_display();
   }
+
   return 0;
 }
 
