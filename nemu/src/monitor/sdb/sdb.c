@@ -86,11 +86,10 @@ static int cmd_info(char *args){
 
 static int cmd_x(char *args){
   if(args!=NULL){
-    printf("%s\n",args);
+    printf("%s %zu\n",args,strlen(args));
     char *arg0 = strtok(args, " ");
     char *arg1 = strtok(NULL, " ");
     printf("%s %s\n",arg0,arg1);
-
   }
 
   return 0;
