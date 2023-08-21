@@ -60,9 +60,17 @@ static int cmd_si(char *args){
     char *arg0 = strtok(args, " ");
     printf("%s\n",args);
     execN=atoi(arg0);
-    printf("%d\n",execN);
+    // printf("%d\n",execN);
   }
   cpu_exec(execN);
+  return 0;
+}
+
+static int cmd_info(char *args){
+  if(args!=NULL){
+    char *arg0 = strtok(args, " ");
+    printf("%s\n",arg0);
+  }
   return 0;
 }
 
@@ -75,6 +83,8 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si","Pause the program after executing N instructions in one step", cmd_si },
+  { "info","Pause the program after executing N instructions in one step", cmd_info },
+
   /* TODO: Add more commands */
 
 };
