@@ -91,11 +91,11 @@ static int cmd_x(char *args){
     char *arg1 = strtok(NULL, " ");
     printf("%s %s\n",arg0,arg1);
     paddr_t addr = strtoul(arg1, NULL, 16);
-    printf("addr = %x\n", addr);
+    // printf("addr = %x\n", addr);
     for(int i=0;i<10;++i){
       // word_t w=paddr_read(addr,4);
       word_t w=vaddr_read(addr,4);
-      printf("Unsigned 32-bit Integer: %u\n", w);
+      // printf("Unsigned 32-bit Integer: %u\n", w);
       printf(" %x\n", w);
       printf("addr = %x\n", addr);
       addr+=4;
