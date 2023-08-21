@@ -73,12 +73,24 @@ static int cmd_info(char *args){
     if(strcmp(arg0,"r")==0){
       isa_reg_display();
     }else if(strcmp(arg0,"w")==0){
-      
+
     }else{
-      printf("error args");
+      printf("error args\n");
     }
   }else{
     isa_reg_display();
+  }
+
+  return 0;
+}
+
+static int cmd_x(char *args){
+  if(args!=NULL){
+    printf("%s\n",args);
+    char *arg0 = strtok(args, " ");
+    char *arg1 = strtok(args, " ");
+    printf("%s %s",arg0,arg1);
+    
   }
 
   return 0;
@@ -94,7 +106,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si","Pause the program after executing N instructions in one step", cmd_si },
   { "info","Pause the program after executing N instructions in one step", cmd_info },
-
+  { "x", "Scan Memory x N EXPR", cmd_x },
   /* TODO: Add more commands */
 
 };
