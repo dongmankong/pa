@@ -21,5 +21,4 @@
 #include <memory/vaddr.h>
 
 word_t expr(char *e, bool *success);
-
 #endif

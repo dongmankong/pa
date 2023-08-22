@@ -105,6 +105,15 @@ static int cmd_x(char *args){
   return 0;
 }
 
+static int cmd_p(char *args){
+  printf("%s\n",args);
+  bool success = true;
+  if(args!=NULL){
+    expr(args,&success);
+  }
+  return 0;
+}
+
 static struct {
   const char *name;
   const char *description;
@@ -116,6 +125,8 @@ static struct {
   { "si","Pause the program after executing N instructions in one step", cmd_si },
   { "info","Pause the program after executing N instructions in one step", cmd_info },
   { "x", "Scan Memory x N EXPR", cmd_x },
+  { "p", "Expression ", cmd_p },
+
   /* TODO: Add more commands */
 
 };
