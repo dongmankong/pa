@@ -142,7 +142,6 @@ static bool make_token(char *e) {
             nr_token++;
             break;
           case TK_DECIMAL:
-            printf("%d\n",TK_DECIMAL);
             tokens[nr_token].type=rules[i].token_type;
             strncpy(tokens[nr_token].str, substr_start, substr_len);
             tokens[nr_token].str[substr_len] = '\0';
@@ -154,7 +153,7 @@ static bool make_token(char *e) {
             tokens[nr_token].str[substr_len] = '\0';
             nr_token++;
             break;
-          default: TODO();
+          default: break;;
         }
 
         break;
