@@ -43,8 +43,8 @@ static struct rule {
   {"\\*", '*'},         // multiply
   {"/", '/'},           // divide
   {"\\(", '('},          // left parenthesis
-  {"\\d+", TK_DECIMAL}, //nums
   {"\\)", ')'},          // right parenthesis
+  {"\\d", TK_DECIMAL}, //nums
 };
 
 #define NR_REGEX ARRLEN(rules)
