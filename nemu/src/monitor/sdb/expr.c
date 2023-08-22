@@ -22,7 +22,7 @@
 
 enum {
   TK_NOTYPE = 256, TK_EQ,
-  TK_DECIMAL=10,
+  // TK_DECIMAL=10,
   /* TODO: Add more token types */
 
 };
@@ -44,7 +44,7 @@ static struct rule {
   {"/", '/'},           // divide
   {"\\(", '('},          // left parenthesis
   {"\\)", ')'},          // right parenthesis
-  {"\\d+", TK_DECIMAL}, //nums
+  {"\\d+", 10}, //nums
 };
 
 #define NR_REGEX ARRLEN(rules)
