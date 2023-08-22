@@ -153,7 +153,7 @@ static bool make_token(char *e) {
             tokens[nr_token].str[substr_len] = '\0';
             nr_token++;
             break;
-          default: break;;
+          default: TODO();
         }
 
         break;
@@ -177,7 +177,7 @@ word_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
+  // TODO();
 
   return 0;
 }
