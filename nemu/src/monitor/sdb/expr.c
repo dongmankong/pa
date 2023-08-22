@@ -38,13 +38,13 @@ static struct rule {
 
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
-  {"==", TK_EQ},        // equal
   {"-", '-'},           // minus
   {"\\*", '*'},         // multiply
   {"/", '/'},           // divide
   {"\\(", '('},          // left parenthesis
   {"\\)", ')'},          // right parenthesis
   {"[0-9]*", TK_DECIMAL}, //nums
+  {"==", TK_EQ},        // equal
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -86,7 +86,7 @@ static bool make_token(char *e) {
   while (e[position] != '\0') {
     /* Try all rules one by one. */
     for (i = 0; i < NR_REGEX; i ++) {
-      printf("%d",i);
+      // printf("%d",i);
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
@@ -100,12 +100,60 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-        tokens[nr_token].type=rules[i].token_type;
-        strncpy(tokens[nr_token].str, substr_start, substr_len);
-        tokens[nr_token].str[substr_len] = '\0';
-        nr_token++;
+
 
         switch (rules[i].token_type) {
+          case TK_NOTYPE:
+            break;
+          case '+':
+            tokens[nr_token].type=rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+            tokens[nr_token].str[substr_len] = '\0';
+            nr_token++;
+            break;
+          case '-':
+            tokens[nr_token].type=rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+            tokens[nr_token].str[substr_len] = '\0';
+            nr_token++;
+            break;
+          case '*':
+            tokens[nr_token].type=rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+            tokens[nr_token].str[substr_len] = '\0';
+            nr_token++;
+            break;
+          case '/':
+            tokens[nr_token].type=rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+            tokens[nr_token].str[substr_len] = '\0';
+            nr_token++;
+            break;
+          case '(':
+            tokens[nr_token].type=rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+            tokens[nr_token].str[substr_len] = '\0';
+            nr_token++;
+            break;
+          case ')':
+            tokens[nr_token].type=rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+            tokens[nr_token].str[substr_len] = '\0';
+            nr_token++;
+            break;
+          case TK_DECIMAL:
+            printf("%d\n",TK_DECIMAL);
+            tokens[nr_token].type=rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+            tokens[nr_token].str[substr_len] = '\0';
+            nr_token++;
+            break;
+          case TK_EQ:
+            tokens[nr_token].type=rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+            tokens[nr_token].str[substr_len] = '\0';
+            nr_token++;
+            break;
           default: TODO();
         }
 
