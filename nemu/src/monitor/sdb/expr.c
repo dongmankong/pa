@@ -226,6 +226,10 @@ word_t eval(int p,int q,bool *success){
         }
       }
     }
+	if(op==TK_NOTYPE){
+		*success=false;
+		return 0;
+	}
     word_t val1 = eval(p, op - 1,success);
     word_t val2 = eval(op + 1, q,success);
     switch (tokens[op].type) {
@@ -271,6 +275,5 @@ bool check_parentheses(int p,int q,bool *success){
 	if(tokens[p].type!='(' || tokens[q].type!=')'){
 		return false;
 	}
-	printf("%c %c",p,q);
 	return true;
 } 
