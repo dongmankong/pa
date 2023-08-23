@@ -256,7 +256,7 @@ bool check_parentheses(int p,int q,bool *success){
       }
     }
   }
-  if(tokens[0].type=='(' && tokens[nr_token-1].type==')'){
+  if(tokens[p].type=='(' && tokens[q].type==')'){
     return true;
   }else{
     return false;
