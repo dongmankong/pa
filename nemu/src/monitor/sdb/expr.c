@@ -189,6 +189,7 @@ word_t expr(char *e, bool *success) {
 }
 
 word_t eval(int p,int q,bool *success){
+	printf("%d %d\n",p,q);
   if (p > q) {
     *success = false;
     return 0;
