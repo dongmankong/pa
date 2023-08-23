@@ -268,9 +268,9 @@ bool check_parentheses(int p,int q,bool *success){
 			l++;
 		}
 	}
-	if(tokens[p].type!='(' || tokens[q].type==')'){
+	if(tokens[p].type!='(' || tokens[q].type!=')'){
 		return false;
 	}
 	printf("%c %c",p,q);
 	return true;
-}
+} 
