@@ -109,7 +109,8 @@ static int cmd_p(char *args){
   printf("%s\n",args);
   bool success = true;
   if(args!=NULL){
-    expr(args,&success);
+    word_t res=expr(args,&success);
+    printf("The value is: %u\n", res);
   }
   return 0;
 }
