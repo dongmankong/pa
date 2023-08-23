@@ -210,8 +210,10 @@ word_t eval(int p,int q,bool *success){
     for(int i=p;i<=q;++i){
       if(tokens[i].type=='('){
         leftParentheses++;
+		continue;
       }else if(tokens[i].type==')'){
         leftParentheses--;
+		continue;
       }
       if(leftParentheses>0){
         continue;
@@ -219,7 +221,7 @@ word_t eval(int p,int q,bool *success){
       if(tokens[i].type=='+' || tokens[i].type=='-'){
         op=i;
       }else if(tokens[i].type=='*' || tokens[i].type=='/'){
-        if(op==TK_DECIMAL || tokens[op].type=='*' || tokens[op].type=='/'){
+        if(op==TK_NOTYPE || tokens[op].type=='*' || tokens[op].type=='/'){
           op=i;
         }
       }
