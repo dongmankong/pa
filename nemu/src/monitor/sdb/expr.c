@@ -271,5 +271,6 @@ bool check_parentheses(int p,int q,bool *success){
 	if(tokens[p].type!='(' || tokens[q].type==')'){
 		return false;
 	}
+	printf("%c %c",p,q);
 	return true;
 }
