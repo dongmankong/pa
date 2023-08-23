@@ -169,6 +169,8 @@ static bool make_token(char *e) {
   return true;
 }
 
+word_t eval(int p,int q,bool *success);
+bool check_parentheses(int p,int q,bool *success);
 
 word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
@@ -179,5 +181,78 @@ word_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   // TODO();
 
-  return 0;
+  return eval(0,nr_token-1,success);
+  // return 0;
+}
+
+word_t eval(int p,int q,bool *success){
+  if (p > q) {
+    *success = false;
+    return 0;
+  }
+  else if (p == q) {
+    if(tokens[p].type!=TK_DECIMAL){
+      *success = false;
+      return 0;
+    }
+    return strtoul(tokens[p].str, NULL, 10);
+  }
+  else if (check_parentheses(p, q,success) == true) {
+    return eval(p + 1, q - 1,success);
+  }
+  else {
+    int op=0 ;
+    int leftParentheses=0;
+    for(int i=0;i<nr_token;++i){
+      if(tokens[i].type=='('){
+        leftParentheses++;
+      }else if(tokens[i].type==')'){
+        leftParentheses--;
+      }
+      if(leftParentheses>0){
+        continue;
+      }
+      if(tokens[i].type=='+' || tokens[i].type=='-'){
+        op=i;
+      }else if(tokens[i].type=='*' || tokens[i].type=='/'){
+        if(tokens[op].type=='*' || tokens[op].type=='/'){
+          op=i;
+        }
+      }
+    }
+    word_t val1 = eval(p, op - 1,success);
+    word_t val2 = eval(op + 1, q,success);
+    switch (op) {
+      case '+': return val1 + val2;
+      case '-': return val1-val2;
+      case '*': return val1*val2;
+      case '/': 
+        if(val2==0){
+          *success=false;
+          printf("error divide by zero ");
+          return 0;
+        }
+        return val1/val2;
+      default: assert(0);
+    }
+  }
+}
+bool check_parentheses(int p,int q,bool *success){
+  int leftParentheses=0;
+  for(int i=0;i<nr_token;++i){
+    if(tokens[i].type=='('){
+      leftParentheses++;
+    }else if(tokens[i].type==')'){
+      leftParentheses--;
+      if(leftParentheses<0){
+        return false;
+        *success=false;
+      }
+    }
+  }
+  if(tokens[0].type=='(' && tokens[nr_token-1].type==')'){
+    return true;
+  }else{
+    return false;
+  }
 }
