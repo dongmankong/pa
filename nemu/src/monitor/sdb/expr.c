@@ -244,21 +244,32 @@ word_t eval(int p,int q,bool *success){
   }
 }
 bool check_parentheses(int p,int q,bool *success){
-  int leftParentheses=0;
-  for(int i=0;i<nr_token;++i){
-    if(tokens[i].type=='('){
-      leftParentheses++;
-    }else if(tokens[i].type==')'){
-      leftParentheses--;
-      if(leftParentheses<0){
-        return false;
-        *success=false;
-      }
-    }
-  }
-  if(tokens[p].type=='(' && tokens[q].type==')'){
-    return true;
-  }else{
-    return false;
-  }
+	int l=p;
+	int r=q;
+	// if(tokens[l].type!='(' || tokens[r].type==')'){
+	// 	return false;
+	// }
+	while(l<=r){
+		if(tokens[l].type=='('){
+			if(tokens[r].type==')'){
+				l++;
+				r--;
+				continue;
+			}else{
+				r--;
+				if(l>=r){
+					*success=false;
+					return false;
+				}
+			}
+		}else if(tokens[l].type==')'){
+			return false;
+		}else{
+			l++;
+		}
+	}
+	if(tokens[p].type!='(' || tokens[q].type==')'){
+		return false;
+	}
+	return true;
 }
