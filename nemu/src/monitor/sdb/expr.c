@@ -218,7 +218,7 @@ word_t eval(int p,int q,bool *success){
       if(tokens[i].type=='+' || tokens[i].type=='-'){
         op=i;
       }else if(tokens[i].type=='*' || tokens[i].type=='/'){
-        if(tokens[op].type=='*' || tokens[op].type=='/'){
+        if(tokens[op].type!='+' || tokens[op].type!='-'){
           op=i;
         }
       }
