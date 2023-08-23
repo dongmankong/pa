@@ -207,7 +207,7 @@ word_t eval(int p,int q,bool *success){
   else {
     int op=0 ;
     int leftParentheses=0;
-    for(int i=0;i<nr_token;++i){
+    for(int i=p;i<=q;++i){
       if(tokens[i].type=='('){
         leftParentheses++;
       }else if(tokens[i].type==')'){
@@ -219,7 +219,7 @@ word_t eval(int p,int q,bool *success){
       if(tokens[i].type=='+' || tokens[i].type=='-'){
         op=i;
       }else if(tokens[i].type=='*' || tokens[i].type=='/'){
-        if(tokens[op].type!='+' || tokens[op].type!='-'){
+        if(tokens[op].type=='*' || tokens[op].type=='/'){
           op=i;
         }
       }
