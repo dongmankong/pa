@@ -111,6 +111,7 @@ static int cmd_p(char *args){
   if(args!=NULL){
     word_t res=expr(args,&success);
     printf("The value is: %u\n", res);
+    printf("%d\n",success);
   }
   return 0;
 }
