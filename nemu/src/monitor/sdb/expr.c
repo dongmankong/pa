@@ -230,12 +230,13 @@ word_t expr(char *e, bool *success) {
       }
       snprintf(tokens[i].str, sizeof(tokens[i].str), "%ld", decimalValue);
       printf("String value: %s\n", tokens[i].str);
+      tokens[i].type=TK_DECIMAL;
     }else if(tokens[i].type==RESGISTER){
 
     }
 	}
 	for(int i=0;i<nr_token;++i){
-		printf("%s",tokens[i].str);
+		printf("%s\n",tokens[i].str);
 	}
   return eval(0,nr_token-1,success);
   // return 0;
