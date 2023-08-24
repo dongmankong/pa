@@ -28,7 +28,8 @@ enum {
   AND=13,
   RESGISTER=14,
   HEX=15,
-  OR=16
+  OR=16,
+  DEREF=17
   /* TODO: Add more token types */
 };
 
@@ -237,6 +238,13 @@ word_t expr(char *e, bool *success) {
       tokens[i].type=TK_DECIMAL;
     }
 	}
+  for (int i = 0; i < nr_token; i ++) {
+    if (tokens[i].type == '*' && (i == 0 || (tokens[i - 1].type !=  TK_DECIMAL && tokens[i].type==TK_DECIMAL) )) {
+      tokens[i-1].type=TK_NOTYPE;
+      tokens[i].type = DEREF;
+      
+    }
+  }
 	for(int i=0;i<nr_token;++i){
 		printf("%s",tokens[i].str);
 	}
