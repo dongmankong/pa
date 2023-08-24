@@ -49,7 +49,7 @@ static struct rule {
   {"\\(", '('},          // left parenthesis
   {"\\)", ')'},          // right parenthesis
 
-  {"\\=\\=)", EQ},          // equal
+  {"\\=\\=", EQ},          // equal
   {"\\!\\=", NOTEQ},          // !=
   {"\\&\\&", AND},          // &&
   {"\\|\\|", OR},          // ||
