@@ -219,9 +219,20 @@ word_t expr(char *e, bool *success) {
 		printf("%s",tokens[i].str);
 	}
 	printf("\n");
-	// for(int i=0;i<nr_token;++i){
-		
-	// }
+	for(int i=0;i<nr_token;++i){
+    char *endPtr;
+		if(tokens[i].type==HEX){
+      long int decimalValue = strtol(tokens[i].str, &endPtr, 16);
+      if (*endPtr != '\0') {
+          printf("无法转换为十进制数\n");
+          *success=false;
+          return 0;
+      }
+      snprintf(tokens[i].str, sizeof(tokens[i].str), "%ld", decimalValue);
+    }else if(tokens[i].type==RESGISTER){
+
+    }
+	}
 
   return eval(0,nr_token-1,success);
   // return 0;
