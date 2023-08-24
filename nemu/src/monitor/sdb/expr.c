@@ -23,8 +23,13 @@
 enum {
   TK_NOTYPE = 256, TK_EQ,
   TK_DECIMAL=10,
+  EQ=11,
+  NOTEQ=12,
+  AND=13,
+  RESGISTER=14,
+  HEX=15,
+  OR=16
   /* TODO: Add more token types */
-
 };
 
 static struct rule {
@@ -43,8 +48,18 @@ static struct rule {
   {"/", '/'},           // divide
   {"\\(", '('},          // left parenthesis
   {"\\)", ')'},          // right parenthesis
+
+  {"\\=\\=)", EQ},          // equal
+  {"\\!\\=", NOTEQ},          // !=
+  {"\\&\\&", AND},          // &&
+  {"\\|\\|", OR},          // ||
+  // {"\\!", '!'},          // ||
+
+
+  {"\\$[a-zA-Z]*[0-9]*", RESGISTER},
+  {"0[xX][0-9a-fA-F]+", HEX}, 
+
   {"[0-9]*", TK_DECIMAL}, //nums
-  {"==", TK_EQ},        // equal
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -147,15 +162,37 @@ static bool make_token(char *e) {
             tokens[nr_token].str[substr_len] = '\0';
             nr_token++;
             break;
-          case TK_EQ:
+          case EQ:
             tokens[nr_token].type=rules[i].token_type;
             strncpy(tokens[nr_token].str, substr_start, substr_len);
             tokens[nr_token].str[substr_len] = '\0';
             nr_token++;
             break;
-          default: TODO();
+          case NOTEQ:
+            tokens[nr_token].type=rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+            tokens[nr_token].str[substr_len] = '\0';
+            nr_token++;
+            break;
+          case AND:
+          case OR:
+          // case '!':
+            tokens[nr_token].type=rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+            tokens[nr_token].str[substr_len] = '\0';
+            nr_token++;
+            break;
+          case RESGISTER: 
+          case HEX:
+            tokens[nr_token].type=rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+            tokens[nr_token].str[substr_len] = '\0';
+            nr_token++;
+            break;  
+          default: 
+            printf("i = %d and No rules is com.\n", i);
+            break;
         }
-
         break;
       }
     }
@@ -207,6 +244,7 @@ word_t eval(int p,int q,bool *success){
   else {
     int op=TK_NOTYPE ;
     int leftParentheses=0;
+    int level=0;
     for(int i=p;i<=q;++i){
       if(tokens[i].type=='('){
         leftParentheses++;
@@ -218,13 +256,33 @@ word_t eval(int p,int q,bool *success){
       if(leftParentheses>0){
         continue;
       }
-      if(tokens[i].type=='+' || tokens[i].type=='-'){
+      if(level<=1 && (tokens[i].type == '*' || tokens[i].type == '/')){
+        level=1;
         op=i;
-      }else if(tokens[i].type=='*' || tokens[i].type=='/'){
-        if(op==TK_NOTYPE || tokens[op].type=='*' || tokens[op].type=='/'){
-          op=i;
-        }
       }
+      if(level<=2 && (tokens[i].type == '+' || tokens[i].type=='-')){
+        level=2;
+        op=i;
+      }
+      if(level<=3 && (tokens[i].type==EQ || tokens[i].type==NOTEQ)){
+        level=3;
+        op=i;
+      }
+      if(level<=4 && tokens[i].type==AND){
+        level=4;
+        op=i;
+      }
+      if(level<=5 && tokens[i].type==OR){
+        level=5;
+        op=i;
+      }
+      // if(tokens[i].type=='+' || tokens[i].type=='-'){
+      //   op=i;
+      // }else if(tokens[i].type=='*' || tokens[i].type=='/'){
+      //   if(op==TK_NOTYPE || tokens[op].type=='*' || tokens[op].type=='/'){
+      //     op=i;
+      //   }
+      // }
     }
 	if(op==TK_NOTYPE){
 		*success=false;
@@ -243,7 +301,13 @@ word_t eval(int p,int q,bool *success){
           return 0;
         }
         return val1/val2;
-      default: assert(0);
+      case EQ: return val1==val2;
+      case NOTEQ: return val1!=val2;
+      case AND: return val1 && val2;
+      case OR: return val1 || val2;
+      default:
+        printf("No Op type.");
+        assert(0);
     }
   }
 }
