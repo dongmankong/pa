@@ -234,11 +234,14 @@ word_t expr(char *e, bool *success) {
     }else if(tokens[i].type==RESGISTER){
       word_t tmp=isa_reg_str2val(tokens[i].str,success);
       sprintf(tokens[i].str, "%u", tmp);
+      tokens[i].type=TK_DECIMAL;
     }
 	}
 	for(int i=0;i<nr_token;++i){
 		printf("%s",tokens[i].str);
 	}
+	printf("\n");
+
   return eval(0,nr_token-1,success);
   // return 0;
 }
