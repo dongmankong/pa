@@ -229,6 +229,7 @@ word_t expr(char *e, bool *success) {
           return 0;
       }
       snprintf(tokens[i].str, sizeof(tokens[i].str), "%ld", decimalValue);
+      printf("String value: %s\n", tokens[i].str);
     }else if(tokens[i].type==RESGISTER){
 
     }
