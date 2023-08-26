@@ -220,6 +220,7 @@ word_t expr(char *e, bool *success) {
 		printf("%s",tokens[i].str);
 	}
 	printf("\n");
+  //处理解16进制
 	for(int i=0;i<nr_token;++i){
     char *endPtr;
 		if(tokens[i].type==HEX){
@@ -238,6 +239,7 @@ word_t expr(char *e, bool *success) {
       tokens[i].type=TK_DECIMAL;
     }
 	}
+  // 处理*解引用问题
   for (int i = 0; i < nr_token; i ++) {
     if (tokens[i].type == '*' && (i == 0 || (tokens[i - 1].type !=  TK_DECIMAL && tokens[i].type==TK_DECIMAL) )) {
       tokens[i-1].type=TK_NOTYPE;
