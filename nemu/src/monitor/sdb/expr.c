@@ -233,14 +233,14 @@ word_t expr(char *e, bool *success) {
       snprintf(tokens[i].str, sizeof(tokens[i].str), "%ld", decimalValue);
       printf("String value: %s\n", tokens[i].str);
       tokens[i].type=TK_DECIMAL;
-    //处理$情况
+    //处理$情况 返回10进制无符号数字
     }else if(tokens[i].type==RESGISTER){
       word_t tmp=isa_reg_str2val(tokens[i].str,success);
       sprintf(tokens[i].str, "%u", tmp);
       tokens[i].type=TK_DECIMAL;
     }
 	}
-  // 处理*解引用问题 解地址如*80000000 求解该地址的值
+  // 处理*解引用问题 解地址如*80000000(*0x80000000) 求解该地址的值
   for (int i = 0; i < nr_token; i ++) {
     if (tokens[i].type == '*' && (i == 0 || (tokens[i - 1].type !=  TK_DECIMAL && tokens[i+1].type==TK_DECIMAL) )) {
       tokens[i].type=TK_NOTYPE;
