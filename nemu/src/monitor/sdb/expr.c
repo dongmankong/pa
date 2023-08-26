@@ -246,7 +246,7 @@ word_t expr(char *e, bool *success) {
       tokens[i-1].type=TK_NOTYPE;
       tokens[i].type = DEREF;
       char *endptr;
-      paddr_t addr = strtoul(tokens[i].str, &endptr, 16);
+      paddr_t addr = strtoul(tokens[i].str, &endptr, 10);
       if (*endptr != '\0') {
           printf("Conversion failed, invalid character: %c\n", *endptr);
       } else {
