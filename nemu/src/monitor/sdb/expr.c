@@ -250,9 +250,7 @@ word_t expr(char *e, bool *success) {
       paddr_t addr = strtoul(tokens[i+1].str, &endptr, 10);
       if (*endptr != '\0') {
           printf("Conversion failed, invalid character: %c\n", *endptr);
-      } else {
-          printf("Converted uint32_t: %u\n", addr);
-      }
+      } 
       word_t w=vaddr_read(addr,4);
       printf(" %x\n", w);
       printf("addr = %x\n", addr);
