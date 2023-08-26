@@ -242,11 +242,12 @@ word_t expr(char *e, bool *success) {
 	}
   // 处理*解引用问题 解地址如*80000000 求解该地址的值
   for (int i = 0; i < nr_token; i ++) {
-    if (tokens[i].type == '*' && (i == 0 || (tokens[i - 1].type !=  TK_DECIMAL && tokens[i].type==TK_DECIMAL) )) {
-      tokens[i-1].type=TK_NOTYPE;
-      tokens[i].type = DEREF;
+    if (tokens[i].type == '*' && (i == 0 || (tokens[i - 1].type !=  TK_DECIMAL && tokens[i+1].type==TK_DECIMAL) )) {
+      tokens[i].type=TK_NOTYPE;
+      // tokens[i].type = DEREF;
+      // tokens[i+1].type = TK_DECIMAL;
       char *endptr;
-      paddr_t addr = strtoul(tokens[i].str, &endptr, 10);
+      paddr_t addr = strtoul(tokens[i+1].str, &endptr, 10);
       if (*endptr != '\0') {
           printf("Conversion failed, invalid character: %c\n", *endptr);
       } else {
@@ -255,6 +256,10 @@ word_t expr(char *e, bool *success) {
       word_t w=vaddr_read(addr,4);
       printf(" %x\n", w);
       printf("addr = %x\n", addr);
+      for(int j=i;j<nr_token-1;++j){
+        tokens[j]=tokens[j+1];
+      }
+      nr_token--;
     }
   }
 	for(int i=0;i<nr_token;++i){
