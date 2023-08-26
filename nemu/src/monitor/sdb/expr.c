@@ -216,10 +216,10 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   // TODO();
-	for(int i=0;i<nr_token;++i){
-		printf("%s",tokens[i].str);
-	}
-	printf("\n");
+	// for(int i=0;i<nr_token;++i){
+	// 	printf("%s",tokens[i].str);
+	// }
+	// printf("\n");
 	for(int i=0;i<nr_token;++i){
   //处理解16进制
 		if(tokens[i].type==HEX){
