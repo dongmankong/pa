@@ -19,7 +19,7 @@
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include <regex.h>
-
+#include <memory/vaddr.h>
 enum {
   TK_NOTYPE = 256, TK_EQ,
   TK_DECIMAL=10,
@@ -220,10 +220,10 @@ word_t expr(char *e, bool *success) {
 		printf("%s",tokens[i].str);
 	}
 	printf("\n");
-  //处理解16进制
 	for(int i=0;i<nr_token;++i){
-    char *endPtr;
+  //处理解16进制
 		if(tokens[i].type==HEX){
+      char *endPtr;
       long int decimalValue = strtol(tokens[i].str, &endPtr, 16);
       if (*endPtr != '\0') {
           printf("无法转换为十进制数\n");
@@ -233,18 +233,28 @@ word_t expr(char *e, bool *success) {
       snprintf(tokens[i].str, sizeof(tokens[i].str), "%ld", decimalValue);
       printf("String value: %s\n", tokens[i].str);
       tokens[i].type=TK_DECIMAL;
+    //处理$情况
     }else if(tokens[i].type==RESGISTER){
       word_t tmp=isa_reg_str2val(tokens[i].str,success);
       sprintf(tokens[i].str, "%u", tmp);
       tokens[i].type=TK_DECIMAL;
     }
 	}
-  // 处理*解引用问题
+  // 处理*解引用问题 解地址如*80000000 求解该地址的值
   for (int i = 0; i < nr_token; i ++) {
     if (tokens[i].type == '*' && (i == 0 || (tokens[i - 1].type !=  TK_DECIMAL && tokens[i].type==TK_DECIMAL) )) {
       tokens[i-1].type=TK_NOTYPE;
       tokens[i].type = DEREF;
-      
+      char *endptr;
+      paddr_t addr = strtoul(tokens[i].str, &endptr, 16);
+      if (*endptr != '\0') {
+          printf("Conversion failed, invalid character: %c\n", *endptr);
+      } else {
+          printf("Converted uint32_t: %u\n", addr);
+      }
+      word_t w=vaddr_read(addr,4);
+      printf(" %x\n", w);
+      printf("addr = %x\n", addr);
     }
   }
 	for(int i=0;i<nr_token;++i){
