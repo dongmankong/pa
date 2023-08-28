@@ -93,7 +93,7 @@ void free_wp(WP *wp){
 void sdb_watchpoint_display(){
   WP* tmp=head;
   while(tmp){
-    printf("Watchpoint.No: %d, expr = \"%s\", old_value = %d\n",
+    printf("Watchpoint.No: %d, expr = \"%s\", old_value = %u\n",
                     tmp->NO, tmp->expr,tmp->old_value);
     tmp=tmp->next;
   }
