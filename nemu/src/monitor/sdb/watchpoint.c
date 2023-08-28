@@ -22,7 +22,7 @@ typedef struct watchpoint {
   struct watchpoint *next;
   bool isUsed;
   char expr[100];
-  int new_value;
+  // int new_value;
   int old_value; 
   /* TODO: Add more members if necessary */
 
@@ -93,8 +93,8 @@ void free_wp(WP *wp){
 void sdb_watchpoint_display(){
   WP* tmp=head;
   while(tmp){
-    printf("Watchpoint.No: %d, expr = \"%s\", old_value = %d, new_value = %d\n",
-                    tmp->NO, tmp->expr,tmp->old_value, tmp->new_value);
+    printf("Watchpoint.No: %d, expr = \"%s\", old_value = %d\n",
+                    tmp->NO, tmp->expr,tmp->old_value);
     tmp=tmp->next;
   }
 }
@@ -125,8 +125,9 @@ void judge_watchpoint(){
     int tmp=expr(wp->expr,&success);
     if(success){
       if(tmp!=wp->old_value){
+          printf("NO %d change; 之前的value为 %d\n",wp->NO,wp->old_value);
+          wp->old_value=tmp;
           nemu_state.state=NEMU_STOP;
-          printf("NO %d change\n",wp->NO);
       }
     }else{
       printf("expr error.\n");
