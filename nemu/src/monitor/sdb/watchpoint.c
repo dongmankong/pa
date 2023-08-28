@@ -132,5 +132,6 @@ void judge_watchpoint(){
       printf("expr error.\n");
       assert(0);
     }
+    wp=wp->next;
   }
 }
