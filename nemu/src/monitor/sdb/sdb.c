@@ -73,7 +73,7 @@ static int cmd_info(char *args){
     if(strcmp(arg0,"r")==0){
       isa_reg_display();
     }else if(strcmp(arg0,"w")==0){
-
+      sdb_watchpoint_display();
     }else{
       printf("error args\n");
     }
@@ -116,6 +116,22 @@ static int cmd_p(char *args){
   return 0;
 }
 
+static int cmd_w(char *args){
+  printf("%s\n",args);
+  if(args!=NULL){
+    create_watchpoint(args);
+  }
+  return 0;
+}
+static int cmd_d(char *args){
+  printf("%s\n",args);
+  if(args!=NULL){
+    delete_watchpoint(atoi(args));
+  }
+  return 0;
+}
+
+
 static struct {
   const char *name;
   const char *description;
@@ -128,7 +144,8 @@ static struct {
   { "info","Pause the program after executing N instructions in one step", cmd_info },
   { "x", "Scan Memory x N EXPR", cmd_x },
   { "p", "Expression ", cmd_p },
-
+  { "w", "Set up monitoring points ", cmd_w },
+  { "d", "Delete monitoring points ", cmd_d },
   /* TODO: Add more commands */
 
 };

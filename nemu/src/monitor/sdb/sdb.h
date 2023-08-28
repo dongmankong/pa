@@ -21,4 +21,8 @@
 #include <memory/vaddr.h>
 
 word_t expr(char *e, bool *success);
+void create_watchpoint(char* args);
+void delete_watchpoint(int no);
+void sdb_watchpoint_display();
+void judge_watchpoint();
 #endif
