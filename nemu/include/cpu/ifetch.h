@@ -16,7 +16,7 @@
 #ifndef __CPU_IFETCH_H__
 
 #include <memory/vaddr.h>
-
+//取pc对应的值（8个16进制 无符号32位）,也就是4个地址位（1个地址8位） 
 static inline uint32_t inst_fetch(vaddr_t *pc, int len) {
   uint32_t inst = vaddr_ifetch(*pc, len);
   (*pc) += len;
