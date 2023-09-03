@@ -37,7 +37,7 @@ enum {
 #define immU() do { *imm = SEXT(BITS(i, 31, 12), 20) << 12; } while(0)
 #define immS() do { *imm = (SEXT(BITS(i, 31, 25), 7) << 5) | BITS(i, 11, 7); } while(0)
 //my
-#define immJ() do { *imm=SEXT((BITS(i,31,31)<<19)+(BITS(i,19,12)<<11)+(BITS(i,20,20)<<10) +BITS(i,30,21),20);printf("imm: %x\n",*imm); } while(0)
+#define immJ() do { *imm=SEXT((BITS(i,31,31)<<20)+(BITS(i,19,12)<<12)+(BITS(i,20,20)<<11) +(BITS(i,30,21)<<1),21);printf("imm: %x\n",*imm); } while(0)
 
 static void decode_operand(Decode *s, int *rd, word_t *src1, word_t *src2, word_t *imm, int type) {
   uint32_t i = s->isa.inst.val;
@@ -58,7 +58,7 @@ static int decode_exec(Decode *s) {
   int rd = 0;
   word_t src1 = 0, src2 = 0, imm = 0;
   s->dnpc = s->snpc;
-  printf("%x,%x\n",s->pc,s->dnpc);
+  // printf("%x,%x\n",s->pc,s->dnpc);
 #define INSTPAT_INST(s) ((s)->isa.inst.val)
 #define INSTPAT_MATCH(s, name, type, ... /* execute body */ ) { \
   decode_operand(s, &rd, &src1, &src2, &imm, concat(TYPE_, type)); \
@@ -83,7 +83,7 @@ static int decode_exec(Decode *s) {
   INSTPAT("??????? ????? ????? ??? ????? ????? ??", inv    , N, INV(s->pc));
 
   INSTPAT_END();
-  printf("%x\n",s->dnpc);
+  // printf("%x\n",s->dnpc);
   R(0) = 0; // reset $zero to 0
 
   return 0;
