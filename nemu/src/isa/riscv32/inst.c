@@ -23,15 +23,15 @@
 #define Mw vaddr_write
 
 enum {
-  TYPE_I, TYPE_U, TYPE_S,TYPE_J,TYPE_RI,
+  TYPE_I, TYPE_U, TYPE_S,TYPE_J,
   TYPE_N // none
 };
 
 #define src1R() do { *src1 = R(rs1);} while (0)
 #define src2R() do { *src2 = R(rs2);} while (0)
 //my
-#define rs1R() do { *src1 = rs1;} while (0)
-#define rs2R() do { *src2 = rs2;} while (0)
+// #define rs1R() do { *src1 = rs1;} while (0)
+// #define rs2R() do { *src2 = rs2;} while (0)
 
 #define immI() do { *imm = SEXT(BITS(i, 31, 20), 12); } while(0)
 #define immU() do { *imm = SEXT(BITS(i, 31, 12), 20) << 12; } while(0)
@@ -50,7 +50,7 @@ static void decode_operand(Decode *s, int *rd, word_t *src1, word_t *src2, word_
     case TYPE_S : src1R(); src2R(); immS(); break;
 
     case TYPE_J :                   immJ(); break;
-    case TYPE_RI: rs1R();          immI(); break;
+    // case TYPE_RI: rs1R();           immI(); break;
   }
 }
 
@@ -73,11 +73,13 @@ static int decode_exec(Decode *s) {
   INSTPAT("0000000 00001 00000 000 00000 11100 11", ebreak , N, NEMUTRAP(s->pc, R(10))); // R(10) is $a0
 
   //my
-  INSTPAT("??????? ????? ????? 000 ????? 00100 11", addi   , RI, R(rd)=imm+R(src1));
+  INSTPAT("??????? ????? ????? 000 ????? 00100 11", addi   , I, R(rd)=imm+src1);
 
   INSTPAT("??????? ????? ????? ??? ????? 00101 11", auipc  , U, R(rd)=imm+s->pc);
 
   INSTPAT("??????? ????? ????? ??? ????? 11011 11", jal    , J, R(rd)=s->pc+4,s->dnpc+=imm);
+
+  INSTPAT("??????? ????? ????? 010 ????? 11001 11", jalr   , I, R(rd)=s->pc+4,s->dnpc=src1+(imm&(0xfffffffe)));
 
   //特殊
   INSTPAT("??????? ????? ????? ??? ????? ????? ??", inv    , N, INV(s->pc));
