@@ -140,6 +140,8 @@ static int decode_exec(Decode *s) {
 
   INSTPAT("000000? ????? ????? 101 ????? 00100 11", srli   , I, R(rd)=(src1>>(imm & 0x3f)); if((imm & 0x20)==1) Log("error,this is riscv32"));
 
+  INSTPAT("0000001 ????? ????? 001 ????? 01100 11", mulh   , R, R(rd)=( (SEXT(src1,32)) * (SEXT(src2,32)) >>32));
+
 
 
   //特殊
