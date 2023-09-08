@@ -223,4 +223,7 @@ void init_sdb() {
 
   /* Initialize the watchpoint pool. */
   init_wp_pool();
+
+  //设置批处理模式、跳过自己按c的操作，直接运行程序
+  sdb_set_batch_mode();
 }
