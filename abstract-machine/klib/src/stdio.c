@@ -47,7 +47,7 @@ size_t strnlen(const char *s, size_t maxlen){
   while(s[num]!='\0'){
     num++;
   }
-  if(num<maxlen) return num;
+  if(num<=maxlen) return num;
   return maxlen;
 }
 uint32_t __attribute__((weak)) __div64_32(uint64_t *n, uint32_t base)
