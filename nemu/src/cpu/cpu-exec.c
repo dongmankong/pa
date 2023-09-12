@@ -120,17 +120,23 @@ void print_iringbuf(){
   int i=(iringbuf_index-1+16)%16;
   if(iringbuf[i][IRING_BUF_PC_START_INDEX]=='\0'){
     for(int j=0;j<i;++j){
+      if(iringbuf[j][IRING_BUF_PC_START_INDEX]=='\0') continue;
       printf("%s\n",iringbuf[j]);
     }
   }else{
     for(int j=i+1;j<IRING_BUF_SIZE;++j){
+      if(iringbuf[j][IRING_BUF_PC_START_INDEX]=='\0') continue;
       printf("%s\n",iringbuf[j]);
     }
     for(int j=0;j<i;++j){
+      if(iringbuf[j][IRING_BUF_PC_START_INDEX]=='\0') continue;
       printf("%s\n",iringbuf[j]);
     }
   }
   // strncpy(iringbuf[i],"-->",3);
+  iringbuf[i][0]='-';
+  iringbuf[i][1]='-';
+  iringbuf[i][2]='>';
   printf("%s\n",iringbuf[i]);
 }
 
