@@ -47,6 +47,7 @@ static char *img_file = NULL;
 static int difftest_port = 1234;
 // 
 static char *elf_file=NULL;
+void parse_elf(const char *elf_file);
 // 
 static long load_img() {
   if (img_file == NULL) {
@@ -72,13 +73,13 @@ static long load_img() {
 
 static int parse_args(int argc, char *argv[]) {
   const struct option table[] = {
-    {"elf"     , required_argument , NULL, 'e'},
     {"batch"    , no_argument      , NULL, 'b'},
     {"log"      , required_argument, NULL, 'l'},
     {"diff"     , required_argument, NULL, 'd'},
     {"port"     , required_argument, NULL, 'p'},
     {"help"     , no_argument      , NULL, 'h'},
     // my
+    {"elf"     , required_argument , NULL, 'e'},
     // 
     {0          , 0                , NULL,  0 },
   };
@@ -111,10 +112,11 @@ static int parse_args(int argc, char *argv[]) {
 
 void init_monitor(int argc, char *argv[]) {
   /* Perform some global initialization. */
-
   /* Parse arguments. */
   parse_args(argc, argv);
-
+  //my
+  parse_elf(elf_file);
+  //
   /* Set random seed. */
   init_rand();
 
