@@ -45,9 +45,16 @@ static char *log_file = NULL;
 static char *diff_so_file = NULL;
 static char *img_file = NULL;
 static int difftest_port = 1234;
-// 
+// my
 static char *elf_file=NULL;
-// 
+typedef struct {
+  char func_name[64]; //name
+  size_t size; //
+  paddr_t start; //地址开始
+}FuncInfo;
+FuncInfo elf_func[1024];
+//
+
 static long load_img() {
   if (img_file == NULL) {
     Log("No image is given. Use the default build-in image.");
