@@ -22,6 +22,7 @@ image:
 
 run: image
 	$(IMAGE) 
+    @$(ISA) -S -s $(NEMUFLAGS)
 
 gdb: image
 	gdb -ex "handle SIGUSR1 SIGUSR2 SIGSEGV noprint nostop" $(IMAGE)
