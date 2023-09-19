@@ -231,7 +231,7 @@ config FTRACE_COND
     default "true"  
 
 config CONFIG_DTRACE
-    depends on TRACE
+    # depends on TRACE
     bool "Enable dtrace"
     default y
     help
