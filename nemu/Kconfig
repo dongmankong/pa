@@ -230,3 +230,9 @@ config FTRACE_COND
     string "Only trace function call when the condition is true"
     default "true"  
 
+config CONFIG_DTRACE
+    depends on TRACE
+    bool "Enable dtrace"
+    default y
+    help
+      Enable dtrace feature. When enabled, dtrace will be active.
