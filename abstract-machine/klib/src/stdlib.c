@@ -39,15 +39,16 @@ void *malloc(size_t size) {
   //   panic() -> putchar() -> (glibc) -> malloc() -> panic()
 
 //my
+  size  = (size_t)ROUNDUP(size, 8);
   if(addr==NULL){
     addr=heap.start;
   }
-  char * old=addr;
+  char *old=addr;
   addr+=size;
   assert((uintptr_t)heap.start <= (uintptr_t)addr && (uintptr_t)addr < (uintptr_t)heap.end);
-  // for (uint64_t *p = (uint64_t *)old; p != (uint64_t *)addr; p ++) {
-  //   *p = 0;
-  // }
+  for (uint64_t *p = (uint64_t *)old; p != (uint64_t *)addr; p ++) {
+    *p = 0;
+  }
   return old;
 //
 #if !(defined(__ISA_NATIVE__) && defined(__NATIVE_USE_KLIB__))
