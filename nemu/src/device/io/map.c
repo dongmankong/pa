@@ -59,9 +59,9 @@ word_t map_read(paddr_t addr, int len, IOMap *map) {
   invoke_callback(map->callback, offset, len, false); // prepare data to read
   word_t ret = host_read(map->space + offset, len);
   
-  // #ifdef CONFIG_DTRACE
+  #ifdef CONFIG_DTRACE
     Log("name: %-8s   lowAddr:0x%8x    highAddr:0x%8x",map->name,map->low,map->high);
-  // #endif
+  #endif
   return ret;
 }
 
