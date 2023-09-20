@@ -20,11 +20,8 @@ void __am_gpu_init() {
 
 void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 //my
-  // uint32_t w = inw(VGACTL_ADDR);  
-  // uint32_t h = inw(VGACTL_ADDR+2);  
-    uint32_t screen_wh = inl(VGACTL_ADDR);
-  uint32_t h = screen_wh & 0xffff;
-  uint32_t w = screen_wh >> 16;
+  uint32_t w = inw(VGACTL_ADDR);  
+  uint32_t h = inw(VGACTL_ADDR+2);  
 //
   *cfg = (AM_GPU_CONFIG_T) {
     .present = true, .has_accel = false,
