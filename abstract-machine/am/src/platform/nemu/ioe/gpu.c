@@ -9,15 +9,20 @@ void __am_gpu_init() {
   uint32_t w = inw(VGACTL_ADDR);  // TODO: get the correct width
   uint32_t h = inw(VGACTL_ADDR+2);  // TODO: get the correct height
   uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
+  
   for (i = 0; i < w * h; i ++) fb[i] = i;
   outl(SYNC_ADDR, 1);
 //
 }
 
 void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
+//my
+  uint32_t w = inw(VGACTL_ADDR);  
+  uint32_t h = inw(VGACTL_ADDR+2);  
+//
   *cfg = (AM_GPU_CONFIG_T) {
     .present = true, .has_accel = false,
-    .width = 0, .height = 0,
+    .width = w, .height = h,
     .vmemsz = 0
   };
 }
