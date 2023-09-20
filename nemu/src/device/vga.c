@@ -75,9 +75,9 @@ static inline void update_screen() {
 void vga_update_screen() {
   // TODO: call `update_screen()` when the sync register is non-zero,
   // then zero out the sync register
-  // IOMap* vgaMap=fetch_mmio_map((paddr_t)CONFIG_FB_ADDR);
   if(mmio_read(CONFIG_FB_ADDR +4,4)!=0){
     update_screen();
+  }else{
     mmio_write(CONFIG_FB_ADDR +4,4,0);
   }
 }
