@@ -15,7 +15,9 @@
 
 #include <common.h>
 #include <device/map.h>
-
+//my
+#include <device/mmio.h>
+//
 #define SCREEN_W (MUXDEF(CONFIG_VGA_SIZE_800x600, 800, 400))
 #define SCREEN_H (MUXDEF(CONFIG_VGA_SIZE_800x600, 600, 300))
 
@@ -69,15 +71,20 @@ static inline void update_screen() {
 }
 #endif
 #endif
-
+//my
 void vga_update_screen() {
   // TODO: call `update_screen()` when the sync register is non-zero,
   // then zero out the sync register
+  // IOMap* vgaMap=fetch_mmio_map((paddr_t)CONFIG_FB_ADDR);
+  if(mmio_read((paddr_t)CONFIG_FB_ADDR +4,4)!=0){
+    update_screen();
+    mmio_write((paddr_t)CONFIG_FB_ADDR +4,4,0);
+  }
 }
-
+//
 void init_vga() {
   vgactl_port_base = (uint32_t *)new_space(8);
-  vgactl_port_base[0] = (screen_width() << 16) | screen_height();
+  vgactl_port_base[0] = (screen_width() << 16) | screen_height(); //宽2B 高2B
 #ifdef CONFIG_HAS_PORT_IO
   add_pio_map ("vgactl", CONFIG_VGA_CTL_PORT, vgactl_port_base, 8, NULL);
 #else
