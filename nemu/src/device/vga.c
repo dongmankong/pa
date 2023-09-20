@@ -78,7 +78,6 @@ void vga_update_screen() {
   uint32_t sync=mmio_read(CONFIG_VGA_CTL_MMIO +4,4);
   if(sync!=0){
     update_screen();
-  }else{
     mmio_write(CONFIG_VGA_CTL_MMIO +4,4,0);
   }
 }
