@@ -5,16 +5,16 @@
 
 void __am_gpu_init() {
 //my
-  // uint32_t i;
-  // uint32_t w = inw(VGACTL_ADDR);  // TODO: get the correct width
-  // uint32_t h = inw(VGACTL_ADDR+2);  // TODO: get the correct height
-  // // int i;
-  // // int w = 0;  // TODO: get the correct width
-  // // int h = 0;  // TODO: get the correct height
-  // uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
+  uint32_t i;
+  uint32_t w = inw(VGACTL_ADDR);  // TODO: get the correct width
+  uint32_t h = inw(VGACTL_ADDR+2);  // TODO: get the correct height
+  // int i;
+  // int w = 0;  // TODO: get the correct width
+  // int h = 0;  // TODO: get the correct height
+  uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
   
-  // for (i = 0; i < w * h; i ++) fb[i] = i;
-  // outl(SYNC_ADDR, 1);
+  for (i = 0; i < w * h; i ++) fb[i] = i;
+  outl(SYNC_ADDR, 1);
 //
 }
 
