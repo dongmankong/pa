@@ -45,11 +45,13 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
     fb+=w*y+x;
     uint32_t *p=ctl->pixels;
     for(int i=0;i<h;++i){
+      uint32_t *fb_first=fb;
       for(int j=0;j<w;++j){
-        *fb=p[i*w+j];
-        printf("%d\n",i*w+j);
-
+        *fb_first=*p;
+        p++;
+        fb_first++;
       }
+      fb+=w;
     }
   }else{
     outl(SYNC_ADDR, 1);
