@@ -46,6 +46,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
       p++;
     }
   }
+  outl(SYNC_ADDR, 1);
 //
 }
 
