@@ -38,7 +38,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 //my
   if(ctl->sync==false){
     int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
-    printf("%d  %d\n",x,y);
+    // printf("%d  %d\n",x,y);
     // if (w == 0 || h == 0) return;
     // int block_size = w * h;
     uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
@@ -47,6 +47,8 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
     for(int i=0;i<h;++i){
       for(int j=0;j<w;++j){
         *fb=p[i*w+j];
+        printf("%d\n",i*w+j);
+
       }
     }
   }else{
