@@ -35,7 +35,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   //   outl(SYNC_ADDR, 1);
   // }
 //my
-  if(ctl->sync){
+  if(ctl->sync==false){
     int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
     if (w == 0 || h == 0) return;
     int block_size = w * h;
@@ -45,8 +45,9 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
       fb[i]=*p;
       p++;
     }
+  }else{
+    outl(SYNC_ADDR, 1);
   }
-  outl(SYNC_ADDR, 1);
 //
 }
 
