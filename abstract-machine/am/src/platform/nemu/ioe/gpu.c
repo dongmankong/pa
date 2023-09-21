@@ -38,14 +38,14 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   if(ctl->sync==false){
     int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
     if (w == 0 || h == 0) return;
-    int block_size = w * h;
+    // int block_size = w * h;
     uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
     fb+=w*y+x;
     uint32_t *p=ctl->pixels;
-    for(int i=0;i<block_size;++i){
-      *fb=*p;
-      fb++;
-      p++;
+    for(int i=0;i<h;++i){
+      for(int j=0;j<w;++j){
+        *fb=p[i*w+j];
+      }
     }
   }else{
     outl(SYNC_ADDR, 1);
