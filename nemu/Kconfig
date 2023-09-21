@@ -139,10 +139,7 @@ config TRACE_END
   int "When tracing is disabled (unit: number of instructions)"
   default 10000
 
-config ITRACE
-  depends on TRACE && TARGET_NATIVE_ELF && ENGINE_INTERPRETER
-  bool "Enable instruction tracer"
-  default y
+
 
 config ITRACE_COND
   depends on ITRACE
@@ -236,3 +233,7 @@ config DTRACE
     default y
     help
       Enable dtrace feature. When enabled, dtrace will be active.
+config ITRACE
+    depends on TRACE 
+    bool "Enable iTRACE"
+    default y

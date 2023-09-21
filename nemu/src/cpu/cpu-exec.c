@@ -143,11 +143,13 @@ void print_iringbuf(){
 /* Simulate how the CPU works. */
 void cpu_exec(uint64_t n) {
   //my
+  #ifdef CONFIG_ITRACE
   iringbuf_index=0;
   for(int i=0;i<IRING_BUF_SIZE;++i){
     memset(iringbuf[i],' ',IRING_BUF_PC_START_INDEX);
     iringbuf[i][IRING_BUF_PC_START_INDEX]='\0';
   }
+  #endif
   //
   g_print_step = (n < MAX_INST_TO_PRINT);
   switch (nemu_state.state) {
