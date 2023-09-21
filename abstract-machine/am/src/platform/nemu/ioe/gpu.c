@@ -41,8 +41,9 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
     // printf("%d  %d\n",x,y);
     // if (w == 0 || h == 0) return;
     // int block_size = w * h;
+    uint32_t screen_w = (inl(VGACTL_ADDR))>>16;  
     uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
-    fb+=w*y+x;
+    fb+=screen_w*y+x;
     uint32_t *p=ctl->pixels;
     for(int i=0;i<h;++i){
       uint32_t *fb_first=fb;
@@ -51,7 +52,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
         p++;
         fb_first++;
       }
-      fb+=w;
+      fb+=screen_w;
     }
   }else{
     outl(SYNC_ADDR, 1);
