@@ -24,7 +24,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
       Log("正确的值为 : %x\n",ref_r->pc);
       Log("error: %d\n",i);
       Log("error: %x\n",cpu.gpr[i]);
-      Log("error: %x\n",ref_r->gpr[i]);
+      Log("正确的值为: %x\n",ref_r->gpr[i]);
 
 
       return false;
