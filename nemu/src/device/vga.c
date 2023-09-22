@@ -82,7 +82,7 @@ void vga_update_screen() {
   //   mmio_write(CONFIG_VGA_CTL_MMIO +4,4,0);
   // }
   uint32_t sync = vgactl_port_base[1];
-  printf("%p\n",vgactl_port_base[1]);
+  printf("%p\n",&vgactl_port_base);
   if (sync) {
     update_screen();
     vgactl_port_base[1] = 0;
