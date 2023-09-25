@@ -36,6 +36,9 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
 
 void yield() {
   asm volatile("li a7, -1; ecall");
+//my
+  // isa_raise_intr(EVENT_YIELD,__am_asm_trap);
+//
 }
 
 bool ienabled() {
