@@ -30,6 +30,11 @@ void init_isa();
 
 // reg
 extern CPU_state cpu;
+
+//my
+typedef concat(__GUEST_ISA__, _CPU_CSRs) CPU_CSRs;
+extern CPU_CSRs csr;
+//
 void isa_reg_display();
 word_t isa_reg_str2val(const char *name, bool *success);
 

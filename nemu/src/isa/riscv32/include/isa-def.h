@@ -17,6 +17,14 @@
 #define __ISA_RISCV32_H__
 
 #include <common.h>
+//my
+typedef struct {
+  word_t mstatus;
+  word_t mcause;
+  word_t mepc;
+  paddr_t mtvec;
+} riscv32_CPU_CSRs;
+//
 
 typedef struct {
   word_t gpr[32];
