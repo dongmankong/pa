@@ -42,6 +42,47 @@ enum {
 #define immB() do { *imm = SEXT((BITS(i,31,31)<<12)+(BITS(i,7,7)<<11)+(BITS(i,30,25)<<5)+\
 (BITS(i,11,8)<<1), 13); } while(0)
 
+
+//my
+static word_t CsrRead(word_t imm){
+  switch (imm){
+    case 0x305:
+      return cpu.csr.mtvec;
+      break;
+    case 0x342:
+      return cpu.csr.mcause;
+      break;
+    case 0x300:
+      return cpu.csr.mstatus;
+      break;
+    case 0x341:
+      return cpu.csr.mepc;
+      break;
+  default:
+    panic("Unknown csr");
+    break;
+  }
+}
+static void CsrWrite(word_t imm,word_t data){
+  switch (imm){
+    case 0x305:
+      cpu.csr.mtvec=data;
+      break;
+    case 0x342:
+      cpu.csr.mcause=data;
+      break;
+    case 0x300:
+      cpu.csr.mstatus=data;
+      break;
+    case 0x341:
+      cpu.csr.mepc=data;
+      break;
+  default:
+    panic("Unknown csr");
+    break;
+  }
+}
+//
 static void decode_operand(Decode *s, int *rd, word_t *src1, word_t *src2, word_t *imm, int type) {
   uint32_t i = s->isa.inst.val;
   int rs1 = BITS(i, 19, 15);
@@ -158,13 +199,20 @@ static int decode_exec(Decode *s) {
 
   INSTPAT("0000001 ????? ????? 101 ????? 01100 11", divu   , R, R(rd)=src1/src2);
 
-  INSTPAT("??????? ????? ????? 000 ????? 00000 11", lb     , I,R(rd)=SEXT(Mr(src1+imm,1),8));
+  INSTPAT("??????? ????? ????? 000 ????? 00000 11", lb     , I, R(rd)=SEXT(Mr(src1+imm,1),8));
 
   INSTPAT("0000001 ????? ????? 011 ????? 01100 11", mulhu  , R, R(rd) = ((uint64_t)src1 * (uint64_t)src2) >> 32);
 
   INSTPAT("??????? ????? ????? 010 ????? 00100 11", slti   , I, R(rd)=(word_t)src1<(int32_t)imm);
 
-  INSTPAT("0000000 00000 00000 000 00000 11100 11" ,ecall  , I,);
+//pa3
+
+
+  INSTPAT("??????? ????? ????? 010 ????? 11100 11", csrrs  , I, word_t t=CsrRead(imm); CsrWrite(imm,(t|R(src1)));R(rd)=t);
+
+  INSTPAT("??????? ????? ????? 001 ????? 11100 11", csrrw  , I, word_t t=CsrRead(imm); CsrWrite(imm,R(src1));R(rd)=t);
+
+  INSTPAT("0000000 00000 00000 000 00000 11100 11" ,ecall  , I, bool success=true; s->dnpc=isa_raise_intr(isa_reg_str2val("a7",&success),s->pc));
   //特殊
   INSTPAT("??????? ????? ????? ??? ????? ????? ??", inv    , N, INV(s->pc));
 

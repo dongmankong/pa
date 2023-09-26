@@ -20,13 +20,9 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
    * Then return the address of the interrupt/exception vector.
    */
 //my
-  switch (NO){
-    case 1:
-      cpu.pc=epc;
-      break;
-
-  }
-  return epc;
+  cpu.csr.mcause=NO;
+  cpu.csr.mepc=epc;
+  return cpu.csr.mtvec;
 //
 }
 

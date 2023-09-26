@@ -21,14 +21,14 @@
 typedef struct {
   word_t mstatus;
   word_t mcause;
-  word_t mepc;
-  paddr_t mtvec;
-} riscv32_CPU_CSRs;
+  word_t mtvec;
+  vaddr_t mepc;
+} riscv32_CSRs;
 //
-
 typedef struct {
   word_t gpr[32];
   vaddr_t pc;
+  riscv32_CSRs csr;
 } riscv32_CPU_state;
 
 // decode
