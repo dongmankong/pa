@@ -84,10 +84,10 @@ void sim_t::diff_set_regs(void* diff_context) {
     state->XPR.write(i, (sword_t)ctx->gpr[i]);
   }
 //my
-  state->mstatus=ctx->mstatus;
-  state->mcause=ctx->mcause;
-  state->mtvec=ctx->mtvec;
-  state->mepc=ctx->mepc;
+  // state->mstatus=ctx->mstatus;
+  // state->mcause=ctx->mcause;
+  // state->mtvec=ctx->mtvec;
+  // state->mepc=ctx->mepc;
 //
   state->pc = ctx->pc;
 }
