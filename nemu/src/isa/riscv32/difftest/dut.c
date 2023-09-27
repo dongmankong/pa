@@ -18,6 +18,7 @@
 #include "../local-include/reg.h"
 
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
+//
   for(int i=0;i<ARRLEN(cpu.gpr);++i){
     if(ref_r->gpr[i]!=cpu.gpr[i]){
       Log("error: %x\n",pc);
@@ -33,7 +34,22 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   if(cpu.pc!=ref_r->pc){
     return false;
   }
+//pa3
+  if(cpu.csr.mcause!=ref_r->csr.mcause){
+    return false;
+  }
+  if(cpu.csr.mepc!=ref_r->csr.mepc){
+    return false;
+  }
+  if(cpu.csr.mstatus!=ref_r->csr.mstatus){
+    return false;
+  }
+  if(cpu.csr.mtvec!=ref_r->csr.mtvec){
+    return false;
+  }
+//
   return true;
+//my
 }
 
 void isa_difftest_attach() {
