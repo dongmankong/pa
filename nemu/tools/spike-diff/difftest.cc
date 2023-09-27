@@ -71,7 +71,7 @@ void sim_t::diff_get_regs(void* diff_context) {
   }
 //my
   // ctx->mstatus=state->mstatus.read();
-  ctx->mcause=state->mcause.read();
+  ctx->mcause=state->mcause->read();
   // ctx->mtvec=state->mtvec;
   // ctx->mepc=state->mepc;
 //
