@@ -70,8 +70,8 @@ void sim_t::diff_get_regs(void* diff_context) {
     ctx->gpr[i] = state->XPR[i];
   }
 //my
-  ctx->mstatus=state->mstatus.read();
-  // ctx->mcause=state->mcause;
+  // ctx->mstatus=state->mstatus.read();
+  ctx->mcause=state->mcause.read();
   // ctx->mtvec=state->mtvec;
   // ctx->mepc=state->mepc;
 //
