@@ -22,11 +22,13 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
 //my
   // Log("%x\n",NO);
   cpu.csr.mcause=NO;
-  if(NO==0xb){
-    cpu.csr.mepc=epc+4;
-  }else{
-    cpu.csr.mepc=epc;
-  }
+  cpu.csr.mepc=epc;
+  // if(NO==0xb){
+  //   cpu.csr.mepc=epc+4;
+  // }else{
+  //   cpu.csr.mepc=epc;
+  // }
+
   // Log("%x\n",cpu.csr.mtvec);
 
   return cpu.csr.mtvec;
