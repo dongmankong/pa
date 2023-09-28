@@ -215,7 +215,7 @@ static int decode_exec(Decode *s) {
   // INSTPAT("0000000 00000 00000 000 00000 11100 11" ,ecall  , I, bool success=true; s->dnpc=(isa_raise_intr(isa_reg_str2val("$a7",&success),s->pc)););
   INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , I, s->dnpc=(isa_raise_intr(0xb,s->pc)););
 
-  INSTPAT("0011000 00010 00000 000 00000 11100 11", mret   , R, s->dnpc=CsrRead(0x341)+4; );
+  INSTPAT("0011000 00010 00000 000 00000 11100 11", mret   , R, s->dnpc=CsrRead(0x341); );
 
   //特殊
   INSTPAT("??????? ????? ????? ??? ????? ????? ??", inv    , N, INV(s->pc));
