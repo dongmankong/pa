@@ -14,7 +14,7 @@
 ***************************************************************************************/
 
 #include <isa.h>
-
+//my NO对应异常种类，epc对应触发异常的指令地址，最后返回异常入口地址
 word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   /* TODO: Trigger an interrupt/exception with ``NO''.
    * Then return the address of the interrupt/exception vector.
@@ -22,7 +22,11 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
 //my
   // Log("%x\n",NO);
   cpu.csr.mcause=NO;
-  cpu.csr.mepc=epc;
+  if(NO==0xb){
+    cpu.csr.mepc=epc+4;
+  }else{
+    cpu.csr.mepc=epc;
+  }
   // Log("%x\n",cpu.csr.mtvec);
 
   return cpu.csr.mtvec;
