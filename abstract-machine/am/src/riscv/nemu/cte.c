@@ -4,6 +4,7 @@
 
 static Context* (*user_handler)(Event, Context*) = NULL;
 
+//my 当做硬件操作 user_handler才是具体的软件操作
 Context* __am_irq_handle(Context *c) {
   if (user_handler) {
     Event ev = {0};
