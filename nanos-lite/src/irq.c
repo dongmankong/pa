@@ -5,7 +5,6 @@ static Context* do_event(Event e, Context* c) {
     case EVENT_YIELD:
       Log("%s\n","进入自陷异常");
       c->mepc+=4;
-      Log("%x\n",c->mepc);
       break;
     default: panic("Unhandled event ID = %d", e.event);
   }
