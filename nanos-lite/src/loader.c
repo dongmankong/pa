@@ -1,6 +1,8 @@
 #include <proc.h>
 #include <elf.h>
-
+//my
+#include "ramdisk.h"
+//
 #ifdef __LP64__
 # define Elf_Ehdr Elf64_Ehdr
 # define Elf_Phdr Elf64_Phdr
@@ -10,8 +12,24 @@
 #endif
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  TODO();
-  return 0;
+  // TODO();
+//my
+  Elf_Ehdr ehdr;
+  ramdisk_read(&ehdr,0,sizeof(Elf_Ehdr));
+  assert(*(uint32_t *)ehdr.e_ident == 0x7f454c46);
+
+  Elf_Phdr phdrs[ehdr.e_phnum];
+  ramdisk_read(phdrs,ehdr.e_phoff,ehdr.e_phentsize);
+  for(int i=0;i<ehdr.e_phnum;++i){
+    if(phdrs[i].p_type==PT_LOAD){
+      ramdisk_write((void *)phdrs[i].p_vaddr,phdrs[i].p_offset,phdrs[i].p_memsz);
+      memset((void*)(phdrs[i].p_vaddr+phdrs[i].p_filesz),0,phdrs[i].p_memsz-phdrs[i].p_filesz);
+    }
+  }
+
+  return ehdr.e_entry;
+//
+  // return 0;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
