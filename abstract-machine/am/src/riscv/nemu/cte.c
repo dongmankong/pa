@@ -46,9 +46,10 @@ bool cte_init(Context*(*handler)(Event, Context*)) {
 Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
   return NULL;
 }
-
 void yield() {
-  asm volatile("li a7, -1; ecall");
+  // asm volatile("li a7, -1; ecall");
+  asm volatile("li a7, 1; ecall");
+
 //my
   // isa_raise_intr(EVENT_YIELD,__am_asm_trap);
 //
