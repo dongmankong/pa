@@ -21,11 +21,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   assert(ehdr.e_machine==EM_RISCV);
   
   Elf_Phdr phdrs[ehdr.e_phnum];
-  Log("%d\n",ehdr.e_phnum);
-  
-  Log("%d\n",sizeof(Elf_Phdr)*ehdr.e_phnum);
-
-  ramdisk_read(phdrs,ehdr.e_phoff,ehdr.e_phentsize);
+  ramdisk_read(phdrs,ehdr.e_phoff,sizeof(Elf_Phdr)*ehdr.e_phnum);
   for(int i=0;i<ehdr.e_phnum;++i){
     if(phdrs[i].p_type==PT_LOAD){
       ramdisk_write((void *)phdrs[i].p_vaddr,phdrs[i].p_offset,phdrs[i].p_memsz);
