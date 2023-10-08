@@ -21,7 +21,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   assert(ehdr.e_machine==EM_RISCV);
   
   Elf_Phdr phdrs[ehdr.e_phnum];
-  Log("%d\n",ehdr.e_phentsize);
+  Log("%d\n",ehdr.e_phnum);
   
   Log("%d\n",sizeof(Elf_Phdr)*ehdr.e_phnum);
 
