@@ -22,6 +22,9 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   
   Elf_Phdr phdrs[ehdr.e_phnum];
   Log("%d\n",ehdr.e_phentsize);
+  
+  Log("%d\n",sizeof(Elf_Phdr)*ehdr.e_phnum);
+
   ramdisk_read(phdrs,ehdr.e_phoff,ehdr.e_phentsize);
   for(int i=0;i<ehdr.e_phnum;++i){
     if(phdrs[i].p_type==PT_LOAD){
