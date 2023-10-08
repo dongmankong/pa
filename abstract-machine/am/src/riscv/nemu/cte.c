@@ -14,7 +14,7 @@ Context* __am_irq_handle(Context *c) {
         ev.event =EVENT_YIELD;
         break;
         //
-      case 0x2:
+      case 0x1:
         ev.event =EVENT_SYSCALL;
         break;
 //
