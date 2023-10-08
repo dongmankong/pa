@@ -28,7 +28,7 @@ void init_proc() {
 
   // load program here
 //my
-  naive_uload(NULL, NULL);
+  // naive_uload(NULL, NULL);
 //
 }
 
