@@ -34,10 +34,10 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
       return false;
     }
   }
-  // if(cpu.pc!=ref_r->pc){
-  //   Log("ref_r->pc\n");
-  //   return false;
-  // }
+  if(cpu.pc!=ref_r->pc){
+    Log("ref_r->pc\n");
+    return false;
+  }
 //pa3
   // if(cpu.csr.mcause!=ref_r->csr.mcause){
   //   Log("mcause error: %x\n",cpu.csr.mcause);
