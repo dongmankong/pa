@@ -5,7 +5,7 @@ void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
 //my
-  c->GPRx=0;
+  // c->GPRx=0;
   // a[2]=c->GPR3;
   // a[3]=c->GPR4;
   Log("%x\n",a[0]);
@@ -13,6 +13,10 @@ void do_syscall(Context *c) {
   switch (a[0]) {
 //my
     case SYS_yield:
+      yield();
+      break;
+    case SYS_exit:
+      c->GPRx=0;
       yield();
       break;
 //
