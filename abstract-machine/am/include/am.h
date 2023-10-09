@@ -27,7 +27,7 @@ typedef struct {
     EVENT_YIELD, EVENT_SYSCALL, EVENT_PAGEFAULT, EVENT_ERROR,
     EVENT_IRQ_TIMER, EVENT_IRQ_IODEV,
 //my
-    // EVENT_EXIT,
+    EVENT_EXIT,
 //
   } event;
   uintptr_t cause, ref;

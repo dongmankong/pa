@@ -17,7 +17,8 @@ void do_syscall(Context *c) {
       // yield();
       break;
     case SYS_exit:
-      c->GPRx=0;
+      halt(a[0]);
+      // c->GPRx=0;
       // yield();
       break;
 //
