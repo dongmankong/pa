@@ -22,6 +22,17 @@ void do_syscall(Context *c) {
       // c->GPRx=0;
       // yield();
       break;
+    //
+    case SYS_write:  //_syscall_(SYS_write, fd, buf, count);
+      assert(a[1]==1 || a[1]==2);
+      unsigned char *p=(unsigned char *)a[2];
+      size_t count=a[3];
+      for(int i=0;i<count;++i){
+        putch(*p);
+        p++;
+      }
+      c->GPRx=count;
+      break;
 //
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
