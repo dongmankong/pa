@@ -8,11 +8,12 @@ void do_syscall(Context *c) {
   // c->GPRx=0;
   // a[2]=c->GPR3;
   // a[3]=c->GPR4;
-  Log("%x\n",a[0]);
+  Log("a[0]: %x\n",a[0]);
 //
   switch (a[0]) {
 //my
     case SYS_yield:
+      c->GPRx=0;
       yield();
       break;
     case SYS_exit:
