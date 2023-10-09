@@ -14,7 +14,7 @@ static Context* do_event(Event e, Context* c) {
       break;  
     case EVENT_EXIT:
       Log("EVENT_EXIT\n");
-      // c->mepc+=4;
+      c->mepc+=4;
       break;  
 //
     default: panic("Unhandled event ID = %d", e.event);
