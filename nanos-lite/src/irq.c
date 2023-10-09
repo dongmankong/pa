@@ -13,8 +13,8 @@ static Context* do_event(Event e, Context* c) {
       c->mepc+=4;
       break;  
     case EVENT_EXIT:
-      Log("EVENT_SYSCALL\n");
-      c->mepc+=4;
+      Log("EVENT_EXIT\n");
+      // c->mepc+=4;
       break;  
 //
     default: panic("Unhandled event ID = %d", e.event);
