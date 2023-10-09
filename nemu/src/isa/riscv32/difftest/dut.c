@@ -33,6 +33,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
     }
   }
   if(cpu.pc!=ref_r->pc){
+    Log("ref_r->pc\n");
     return false;
   }
 //pa3
