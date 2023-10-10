@@ -10,8 +10,8 @@ Context* __am_irq_handle(Context *c) {
     Event ev = {0};
     switch (c->mcause) {
 //my
-      // case -1:
-      case 0xb:
+      case -1:
+      // case 0xb:
 
         ev.event =EVENT_YIELD;
         break;
@@ -54,8 +54,8 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
   return NULL;
 }
 void yield() {
-  // asm volatile("li a7, -1; ecall");
-  asm volatile("li a7, 10; ecall");
+  asm volatile("li a7, -1; ecall");
+  // asm volatile("li a7, 10; ecall");
 
 
 //my
