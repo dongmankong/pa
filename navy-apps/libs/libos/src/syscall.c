@@ -70,9 +70,9 @@ int _write(int fd, void *buf, size_t count) {
   // _exit(SYS_write);
 //my
   // Log("%d\n",count);
-  int res=_syscall_(SYS_write, fd, (intptr_t)buf, count);
+  // int res=_syscall_(SYS_write, fd, (intptr_t)buf, count);
   // Log("%d\n",res);
-  return count;
+  // return count;
   return _syscall_(SYS_write, fd, (intptr_t)buf, count);
 //
   // return 0;

@@ -32,6 +32,7 @@ void do_syscall(Context *c) {
       // int count=13;
       for(int i=0;i<count;++i){
         putch(p[i]);
+        Log("%c\n",p[i]);
         // p++;
       }
       c->GPRx=count;
