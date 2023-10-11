@@ -10,7 +10,7 @@ void do_syscall(Context *c) {
   a[1]=c->GPR2;
   a[2]=c->GPR3;
   a[3]=c->GPR4;
-  // Log("a[0]: %x,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
+  Log("a[0]: %x,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
 //
   switch (a[0]) {
 //my
@@ -25,7 +25,7 @@ void do_syscall(Context *c) {
       break;
     //
     case SYS_write:  //_syscall_(SYS_write, fd, buf, count);
-      Log("a[0]: %x,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
+      // Log("a[0]: %x,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
       assert(a[1]==1 || a[1]==2);
       unsigned char *p=(unsigned char *)a[2];
       size_t count=a[3];
