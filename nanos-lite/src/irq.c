@@ -11,7 +11,7 @@ static Context* do_event(Event e, Context* c) {
       break;
     //
     case EVENT_SYSCALL:
-      Log("EVENT_SYSCALL\n");
+      // Log("EVENT_SYSCALL\n");
       do_syscall(c);
       c->mepc+=4;
       break;  

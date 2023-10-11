@@ -20,7 +20,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
    * Then return the address of the interrupt/exception vector.
    */
 //my
-  Log("异常类型： %u\n",NO);
+  // Log("异常类型： %u\n",NO);
   cpu.csr.mcause=NO;
   cpu.csr.mepc=epc;
   // if(NO==0xb){
