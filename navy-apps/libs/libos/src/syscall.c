@@ -83,7 +83,8 @@ void *_sbrk(intptr_t increment) {
   // static char *myend = &_end;
   intptr_t old_brk=brk;
   intptr_t new_brk=old_brk+increment;
-  if(_syscall_(SYS_brk, new_brk, 0, 0)==0){
+  intptr_t res = _syscall_(SYS_brk,new_brk,0,0);
+  if(res==0){
     brk=new_brk;
     return (void*)old_brk;
     // program_break+=increment;
