@@ -42,7 +42,7 @@
 #endif
 
 //my
-extern char end;  /* _end是由链接器定义的符号，表示数据段的结束位置 */
+extern char _end;  /* _end是由链接器定义的符号，表示数据段的结束位置 */
 // char *program_break = &end;  /* 初始化program break为数据段结束位置 */
 //
 // my # define ARGS_ARRAY ("ecall", "a7", "a0", "a1", "a2", "a0")
@@ -69,7 +69,6 @@ int _open(const char *path, int flags, mode_t mode) {
 int _write(int fd, void *buf, size_t count) {
   // _exit(SYS_write);
 //my
-  Log("asdsadsafcdsvfdvdsvsdvdxvxdvxvd%d",count);
   return _syscall_(SYS_write, fd, (intptr_t)buf, count);
 //
   // return 0;
@@ -78,14 +77,14 @@ int _write(int fd, void *buf, size_t count) {
 void *_sbrk(intptr_t increment) {
 //my
   // char *old_brk=program_break;
-  static char *myend = &end;
-  // if(_syscall_(SYS_brk, increment, 0, 0)==0){
-  //   void *ret = myend;
-  //   myend += increment;
-  //   return (void*)ret;
-  //   // program_break+=increment;
-  //   // return (void *)old_brk;
-  // }
+  static char *myend = &_end;
+  if(_syscall_(SYS_brk, increment, 0, 0)==0){
+    void *ret = myend;
+    myend += increment;
+    return (void*)ret;
+    // program_break+=increment;
+    // return (void *)old_brk;
+  }
 //
   return (void *)-1;
 }
