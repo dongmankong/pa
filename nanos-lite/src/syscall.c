@@ -32,6 +32,7 @@ void do_syscall(Context *c) {
       int count=13;
 
       for(int i=0;i<count;++i){
+        Log("%c\n",p);
         putch(*p);
         p++;
       }
