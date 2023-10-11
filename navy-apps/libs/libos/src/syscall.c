@@ -85,7 +85,6 @@ void *_sbrk(intptr_t increment) {
     // program_break+=increment;
     // return (void *)old_brk;
   }
-  return (void*)myend;
 //
   return (void *)-1;
 }
