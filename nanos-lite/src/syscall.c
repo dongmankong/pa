@@ -27,13 +27,12 @@ void do_syscall(Context *c) {
     case SYS_write:  //_syscall_(SYS_write, fd, buf, count);
       // Log("a[0]: %x,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
       assert(a[1]==1 || a[1]==2);
-      unsigned char *p=(unsigned char *)a[2];
+      char *p=(char *)a[2];
       size_t count=a[3];
       // int count=13;
-
       for(int i=0;i<count;++i){
-        putch(*p);
-        p++;
+        putch(p[i]);
+        // p++;
       }
       c->GPRx=count;
       break;
