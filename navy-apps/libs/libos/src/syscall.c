@@ -69,7 +69,7 @@ int _open(const char *path, int flags, mode_t mode) {
 int _write(int fd, void *buf, size_t count) {
   // _exit(SYS_write);
 //my
-  return _syscall_(SYS_write, fd, (intptr_t)buf, count);
+  return _syscall_(SYS_write, fd, (intptr_t)buf, 13);
 //
   // return 0;
 }
@@ -78,14 +78,13 @@ void *_sbrk(intptr_t increment) {
 //my
   // char *old_brk=program_break;
   static char *myend = &_end;
-  // if(_syscall_(SYS_brk, increment, 0, 0)==0){
-    _syscall_(SYS_brk, increment, 0, 0)
+  if(_syscall_(SYS_brk, increment, 0, 0)==0){
     void *ret = myend;
     myend += increment;
     return (void*)ret;
     // program_break+=increment;
     // return (void *)old_brk;
-  // }
+  }
 //
   return (void *)-1;
 }
