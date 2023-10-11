@@ -37,7 +37,6 @@ void do_syscall(Context *c) {
       break;
     case SYS_brk: //_syscall_(SYS_brk, (intptr_t)program_break, increment, 0)==0
       // a[1]=(uint32_t)(char*)a[1]+(int)a[2];
-      Log("dasasdasdasd\n");
       c->GPRx=0;
       break;
 //
