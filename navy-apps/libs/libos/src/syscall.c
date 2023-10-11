@@ -42,8 +42,8 @@
 #endif
 
 //my
-extern char _end;  /* _end是由链接器定义的符号，表示数据段的结束位置 */
-char *program_break = &_end;  /* 初始化program break为数据段结束位置 */
+extern char end;  /* _end是由链接器定义的符号，表示数据段的结束位置 */
+char *program_break = &end;  /* 初始化program break为数据段结束位置 */
 //
 // my # define ARGS_ARRAY ("ecall", "a7", "a0", "a1", "a2", "a0")
 intptr_t _syscall_(intptr_t type, intptr_t a0, intptr_t a1, intptr_t a2) {
