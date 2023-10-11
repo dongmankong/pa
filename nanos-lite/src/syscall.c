@@ -29,7 +29,7 @@ void do_syscall(Context *c) {
       assert(a[1]==1 || a[1]==2);
       unsigned char *p=(unsigned char *)a[2];
       // size_t count=a[3];
-      size_t count=13;
+      int count=13;
 
       for(int i=0;i<count;++i){
         putch(*p);
