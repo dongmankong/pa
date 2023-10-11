@@ -78,13 +78,13 @@ void *_sbrk(intptr_t increment) {
 //my
   // char *old_brk=program_break;
   static char *myend = &end;
-  // if(_syscall_(SYS_brk, increment, 0, 0)==0){
-  //   void *ret = myend;
-  //   myend += increment;
-  //   return (void*)ret;
-  //   // program_break+=increment;
-  //   // return (void *)old_brk;
-  // }
+  if(_syscall_(SYS_brk, increment, 0, 0)==0){
+    void *ret = myend;
+    myend += increment;
+    return (void*)ret;
+    // program_break+=increment;
+    // return (void *)old_brk;
+  }
 //
   return (void *)-1;
 }
