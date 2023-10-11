@@ -40,6 +40,11 @@
 #else
 #error _syscall_ is not implemented
 #endif
+
+//my
+extern char _end;  /* _end是由链接器定义的符号，表示数据段的结束位置 */
+char *program_break = &_end;  /* 初始化program break为数据段结束位置 */
+//
 // my # define ARGS_ARRAY ("ecall", "a7", "a0", "a1", "a2", "a0")
 intptr_t _syscall_(intptr_t type, intptr_t a0, intptr_t a1, intptr_t a2) {
   register intptr_t _gpr1 asm (GPR1) = type;
@@ -70,6 +75,13 @@ int _write(int fd, void *buf, size_t count) {
 }
 
 void *_sbrk(intptr_t increment) {
+//my
+  char *old_brk=program_break;
+  if(_syscall_(SYS_brk, increment, 0, 0)==0){
+    program_break+=increment;
+    return (void *)old_brk;
+  }
+//
   return (void *)-1;
 }
 

@@ -1,6 +1,7 @@
 #include <common.h>
 #include "syscall.h"
-
+//my  a[0] type; a[1] a0;a[2] a1;a[3] a2
+//
 void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
@@ -32,6 +33,10 @@ void do_syscall(Context *c) {
         p++;
       }
       c->GPRx=count;
+      break;
+    case SYS_brk: //_syscall_(SYS_brk, (intptr_t)program_break, increment, 0)==0
+      // a[1]=(uint32_t)(char*)a[1]+(int)a[2];
+      c->GPRx=0;
       break;
 //
     default: panic("Unhandled syscall ID = %d", a[0]);
