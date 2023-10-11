@@ -78,8 +78,8 @@ int _write(int fd, void *buf, size_t count) {
   // return 0;
 }
 //my
-extern char _end;  /* _end是由链接器定义的符号，表示数据段的结束位置 */
-static intptr_t brk=(intptr_t)&_end;
+extern char end;  /* _end是由链接器定义的符号，表示数据段的结束位置 */
+static intptr_t brk=(intptr_t)&end;
 //
 void *_sbrk(intptr_t increment) {
 //my
