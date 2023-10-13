@@ -22,7 +22,11 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   for(int i=0;i<ARRLEN(cpu.gpr);++i){
     if(ref_r->gpr[i]!=cpu.gpr[i]){
       //pa3
-      if(ref_r->gpr[5]==0xb) continue;
+      // if(ref_r->gpr[5]==0xb) continue;
+        cpu.csr.mstatus &= ~(1<<7);
+        cpu.csr.mstatus |= ((cpu.csr.mstatus&(1<<3))<<4);
+        cpu.csr.mstatus &= ~(1<<3);
+        cpu.csr.mstatus |= ((1<<11)+(1<<12));
       //
       Log("error: %x\n",pc);
       Log("正确的值为 : %x\n",ref_r->pc);
