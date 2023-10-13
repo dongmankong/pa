@@ -83,9 +83,21 @@ size_t fs_read(int fd, void *buf, size_t len){
   return len;
 }
 
-// size_t write(int fd, const void *buf, size_t len){
-
-// }
+size_t fs_write(int fd, const void *buf, size_t len){
+  Log("write\n");
+  if(len==0) return 0;
+  size_t shengyu=file_table[fd].size-(file_table[fd].disk_offset-file_table[fd].start_offset);
+  // Log("%d\n",len);
+  if(shengyu<len){
+    Log("文件越界\n");
+    assert(0);
+  }
+  ramdisk_write(buf,file_table[fd].disk_offset,len);
+  file_table[fd].disk_offset+=len;
+  // Log("%x",*(uint32_t *)ehdr.e_ident);
+  Log("离开write\n");
+  return len;
+}
 
 
 int fs_close(int fd){
