@@ -74,7 +74,7 @@ size_t fs_read(int fd, void *buf, size_t len){
     Log("文件越界\n");
     assert(0);
   }
-  ramdisk_read(buf,file_table[fd].disk_offset,file_table[fd].size);
+  ramdisk_read(buf,file_table[fd].disk_offset,len);
   // Log("%x",*(uint32_t *)ehdr.e_ident);
   return len;
 }
