@@ -44,6 +44,7 @@ void do_syscall(Context *c) {
 
     // case SYS_open:
 
+
 //
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
