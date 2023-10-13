@@ -51,6 +51,7 @@ static Finfo file_table[] __attribute__((used)) = {
 
 //my
 int fs_open(const char *pathname, int flags, int mode){
+  Log("%s\n",pathname);
   for(int i=0;i<sizeof(file_table)/sizeof(Finfo);++i){
       if(strcpy(file_table[i].name,pathname)==0){
         Log("文件下标为%d\n",i);
