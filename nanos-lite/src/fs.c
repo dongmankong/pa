@@ -68,7 +68,7 @@ size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 
 size_t fs_read(int fd, void *buf, size_t len){
   if(len==0) return 0;
-  size_t shengyu=file_table[fd].disk_offset-file_table[fd].start_offset;
+  size_t shengyu=file_table[fd].size-(file_table[fd].disk_offset-file_table[fd].start_offset);
   Log("%d\n",shengyu);
   if(shengyu<len){
     Log("文件越界\n");
