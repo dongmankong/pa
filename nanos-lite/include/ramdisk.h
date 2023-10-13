@@ -1,5 +1,22 @@
-//自建
-// #include <common.h>
-size_t ramdisk_read(void *buf, size_t offset, size_t len);
-
-size_t ramdisk_write(const void *buf, size_t offset, size_t len);
+// file path, file size, offset in disk
+{"/share/pictures/projectn.bmp", 49290, 0},
+{"/share/files/num", 5000, 49290},
+{"/share/fonts/Courier-11.bdf", 23272, 54290},
+{"/share/fonts/Courier-13.bdf", 25677, 77562},
+{"/share/fonts/Courier-7.bdf", 19567, 103239},
+{"/share/fonts/Courier-9.bdf", 20488, 122806},
+{"/share/fonts/Courier-12.bdf", 24339, 143294},
+{"/share/fonts/Courier-10.bdf", 21440, 167633},
+{"/share/fonts/Courier-8.bdf", 20114, 189073},
+{"/share/music/little-star.ogg", 140946, 209187},
+{"/share/music/rhythm/Re.ogg", 6503, 350133},
+{"/share/music/rhythm/Do.ogg", 6473, 356636},
+{"/share/music/rhythm/So.ogg", 6538, 363109},
+{"/share/music/rhythm/Fa.ogg", 6625, 369647},
+{"/share/music/rhythm/Mi.ogg", 6611, 376272},
+{"/share/music/rhythm/Si.ogg", 6647, 382883},
+{"/share/music/rhythm/empty.ogg", 4071, 389530},
+{"/share/music/rhythm/La.ogg", 6542, 393601},
+{"/bin/hello", 30328, 400143},
+{"/bin/dummy", 28296, 430471},
+{"总用量", 458767, 458767},

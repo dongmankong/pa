@@ -17,6 +17,7 @@ Context* __am_irq_handle(Context *c) {
         break;
         //
       case 0x1:
+      case 2:
       case 0x0:
       case 0x4:
       case 0x9:

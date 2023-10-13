@@ -41,6 +41,9 @@ void do_syscall(Context *c) {
       // a[1]=(uint32_t)(char*)a[1]+(int)a[2];
       c->GPRx=0;
       break;
+
+    // case SYS_open:
+
 //
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
