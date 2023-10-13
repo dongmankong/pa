@@ -53,7 +53,7 @@ static Finfo file_table[] __attribute__((used)) = {
 int fs_open(const char *pathname, int flags, int mode){
   Log("%s\n",pathname);
   for(int i=0;i<sizeof(file_table)/sizeof(Finfo);++i){
-      if(strcpy(file_table[i].name,pathname)==0){
+      if(strcmp(file_table[i].name,pathname)==0){
         Log("文件下标为%d\n",i);
         file_table[i].start_offset=file_table[i].disk_offset;
         return i;  //文件记录表的下标作为相应文件的文件描述符返回给用户程序
