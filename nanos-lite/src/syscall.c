@@ -52,7 +52,7 @@ void do_syscall(Context *c) {
     case SYS_open: //_syscall_(SYS_open, path, flags, mode);
       c->GPRx=fs_open((char *)a[1], a[2], a[3]);
       break;
-
+    
 
 //
     default: panic("Unhandled syscall ID = %d", a[0]);
