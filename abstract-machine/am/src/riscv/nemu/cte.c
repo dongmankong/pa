@@ -16,10 +16,10 @@ Context* __am_irq_handle(Context *c) {
         ev.event =EVENT_YIELD;
         break;
         //
+      case 0x0: //SYS_exit
       case 0x1:
       case 0x2: //SYS_open
       case 0x3: //SYS_read
-      case 0x0: //SYS_exit
       case 0x4:
       case 0x7: //SYS_close
       case 0x8: //SYS_lseek
