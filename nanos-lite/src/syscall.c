@@ -54,7 +54,7 @@ void do_syscall(Context *c) {
       x=fs_open((char *)a[1], a[2], a[3]);
       c->GPRx=x;
       // c->GPRx=fs_open((char *)a[1], a[2], a[3]);
-      Log("open over\n");
+      Log("open over    x:%d\n",x);
       break;
     case SYS_read: //_read(int fd, void *buf, size_t count)
       c->GPRx=fs_read(a[1], (void *)a[2], a[3]);
