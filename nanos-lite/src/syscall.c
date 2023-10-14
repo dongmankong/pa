@@ -52,8 +52,15 @@ void do_syscall(Context *c) {
     case SYS_open: //_syscall_(SYS_open, path, flags, mode);
       c->GPRx=fs_open((char *)a[1], a[2], a[3]);
       break;
-    
-
+    case SYS_read: //_read(int fd, void *buf, size_t count)
+      c->GPRx=fs_read(a[1], (void *)a[2], a[3]);
+      break;
+    case SYS_close: //_syscall_(SYS_close, fd, 0, 0)
+      c->GPRx=fs_close(a[1]);
+      break;
+    case SYS_lseek: //_lseek(int fd, off_t offset, int whence)
+      c->GPRx=fs_lseek(a[1], a[2], a[3]);
+      break;
 //
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
