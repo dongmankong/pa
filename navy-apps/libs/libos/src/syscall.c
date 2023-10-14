@@ -76,7 +76,7 @@ int _write(int fd, void *buf, size_t count) {
   // int res=_syscall_(SYS_write, fd, (intptr_t)buf, count);
   // Log("%d\n",res);
   // return count;
-  Log("%d\n",fd);
+  // Log("%d\n",fd);
   return _syscall_(SYS_write, fd, (intptr_t)buf, count);
 //
   // return 0;
@@ -112,7 +112,7 @@ void *_sbrk(intptr_t increment) {
 int _read(int fd, void *buf, size_t count) {
   // _exit(SYS_read);
   //my
-  return  _syscall_(SYS_read, buf, count, 0);
+  return  _syscall_(SYS_read, (intptr_t)buf, count, 0);
   //
   // return 0;
 }
