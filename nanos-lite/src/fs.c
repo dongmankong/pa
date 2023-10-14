@@ -99,7 +99,27 @@ size_t fs_write(int fd, const void *buf, size_t len){
   return len;
 }
 
-
+size_t fs_lseek(int fd, size_t offset, int whence){
+  //enum {SEEK_SET, SEEK_CUR, SEEK_END};
+  switch (whence)
+  {
+  case SEEK_SET:
+    file_table[fd].disk_offset=file_table[fd].start_offset+offset;
+    return file_table[fd].disk_offset;
+    break;
+  case SEEK_CUR:
+    file_table[fd].disk_offset=file_table[fd].disk_offset+offset;
+    return file_table[fd].disk_offset;
+    break;
+  case SEEK_END:
+    file_table[fd].disk_offset=file_table[fd].start_offset+file_table[fd].size+offset;
+    return file_table[fd].disk_offset;
+    break;
+  default:
+    break;
+  }
+  return -1;
+}
 int fs_close(int fd){
   return 0;
 }
