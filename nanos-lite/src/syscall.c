@@ -19,6 +19,7 @@ void do_syscall(Context *c) {
   a[3]=c->GPR4;
   Log("a[0]: %x,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
 //
+  int x;
   switch (a[0]) {
 //my
     case SYS_yield:
@@ -50,7 +51,9 @@ void do_syscall(Context *c) {
       break;
 
     case SYS_open: //_syscall_(SYS_open, path, flags, mode);
-      c->GPRx=fs_open((char *)a[1], a[2], a[3]);
+      x=fs_open((char *)a[1], a[2], a[3]);
+      c->GPRx=x;
+      // c->GPRx=fs_open((char *)a[1], a[2], a[3]);
       Log("open over\n");
       break;
     case SYS_read: //_read(int fd, void *buf, size_t count)
