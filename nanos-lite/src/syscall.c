@@ -51,6 +51,7 @@ void do_syscall(Context *c) {
 
     case SYS_open: //_syscall_(SYS_open, path, flags, mode);
       c->GPRx=fs_open((char *)a[1], a[2], a[3]);
+      Log("open jieshu\n");
       break;
     case SYS_read: //_read(int fd, void *buf, size_t count)
       c->GPRx=fs_read(a[1], (void *)a[2], a[3]);
