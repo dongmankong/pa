@@ -48,14 +48,14 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     assert(ehdr.e_machine==EM_RISCV);
     
     Elf_Phdr phdrs[ehdr.e_phnum];
-    ramdisk_read(phdrs,ehdr.e_phoff,sizeof(Elf_Phdr)*ehdr.e_phnum);
+    ramdisk_read(phdrs,ehdr.e_phoff+0x400143,sizeof(Elf_Phdr)*ehdr.e_phnum);
     for(int i=0;i<ehdr.e_phnum;++i){
       if(phdrs[i].p_type==PT_LOAD){
-        ramdisk_read((void *)phdrs[i].p_vaddr,phdrs[i].p_offset,phdrs[i].p_memsz);
-        memset((void*)(phdrs[i].p_vaddr+phdrs[i].p_filesz),0,phdrs[i].p_memsz-phdrs[i].p_filesz);
+        ramdisk_read((void *)phdrs[i].p_vaddr,phdrs[i].p_offset+0x400143,phdrs[i].p_memsz);
+        memset((void*)(phdrs[i].p_vaddr+phdrs[i].p_filesz)+0x400143,0,phdrs[i].p_memsz-phdrs[i].p_filesz);
       }
     }
-    return ehdr.e_entry;
+    return ehdr.e_entry+0x400143;
 /////////////////////////////////////////////////////////
 
 //
