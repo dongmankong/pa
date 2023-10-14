@@ -66,7 +66,7 @@ int _open(const char *path, int flags, mode_t mode) {
   //my
   return _syscall_(SYS_open, path, flags, mode);
   //
-  return 0;
+  // return 0;
 }
 
 int _write(int fd, void *buf, size_t count) {
