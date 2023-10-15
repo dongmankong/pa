@@ -125,7 +125,7 @@ int _close(int fd) {
 
 off_t _lseek(int fd, off_t offset, int whence) {
   //my
-  ("aaaaaaaaaaaaaaaaaaaaaaaaaa%d %d %d\n",fd,offset,whence);
+  Log("aaaaaaaaaaaaaaaaaaaaaaaaaa%d %d %d\n",fd,offset,whence);
   return _syscall_(SYS_lseek, fd, offset, whence);
   //
   // _exit(SYS_lseek);
