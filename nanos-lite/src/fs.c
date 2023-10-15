@@ -101,7 +101,7 @@ size_t fs_write(int fd, const void *buf, size_t len){
 
 size_t fs_lseek(int fd, size_t offset, int whence){
   //enum {SEEK_SET, SEEK_CUR, SEEK_END};
-  // Log("%d      %d\n",offset,whence);
+  Log("%d      %d\n",offset,whence);
   switch (whence)
   {
   case SEEK_SET:
