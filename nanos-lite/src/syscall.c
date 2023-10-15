@@ -35,16 +35,22 @@ void do_syscall(Context *c) {
     case SYS_write:  //_syscall_(SYS_write, fd, buf, count);
       // Log("write\n");
       // Log("a[0]: %x,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
-      assert(a[1]==1 || a[1]==2);
-      char *p=(char *)a[2];
-      size_t count=a[3];
-      // int count=13;
-      for(int i=0;i<count;++i){
-        putch(p[i]);
-        // Log("%c\n",p[i]);
-        // p++;
+      // assert(a[1]==1 || a[1]==2);
+      if(a[1]==1){ //stdout 标准流
+        char *p=(char *)a[2];
+        size_t count=a[3];
+        // int count=13;
+        for(int i=0;i<count;++i){
+          putch(p[i]);
+          // Log("%c\n",p[i]);
+          // p++;
+        }
+        c->GPRx=count;
+      }else{
+        c->GPRx=fs_write(a[1], (void *)a[2], a[3]);
       }
-      c->GPRx=count;
+
+
       break;
     case SYS_brk: //_syscall_(SYS_brk, (intptr_t)program_break, increment, 0)==0
       // a[1]=(uint32_t)(char*)a[1]+(int)a[2];
