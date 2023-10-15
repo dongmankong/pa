@@ -70,6 +70,7 @@ void do_syscall(Context *c) {
       c->GPRx=fs_close(a[1]);
       break;
     case SYS_lseek: //_lseek(int fd, off_t offset, int whence)
+      Log("lseek\n");
       c->GPRx=fs_lseek(a[1], a[2], a[3]);
       break;
 //
