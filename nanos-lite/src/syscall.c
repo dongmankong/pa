@@ -17,7 +17,7 @@ void do_syscall(Context *c) {
   a[1]=c->GPR2;
   a[2]=c->GPR3;
   a[3]=c->GPR4;
-  Log("\033[94异常类型为: %x    033[0m ,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
+  Log("异常类型为: %x   \033[33m异常类型为: %x\033[0m\n,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
 //
   // int x;
   switch (a[0]) {
