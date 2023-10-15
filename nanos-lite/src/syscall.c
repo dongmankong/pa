@@ -17,7 +17,7 @@ void do_syscall(Context *c) {
   a[1]=c->GPR2;
   a[2]=c->GPR3;
   a[3]=c->GPR4;
-  Log("a[0]: %x,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
+  // Log("a[0]: %x,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
 //
   // int x;
   switch (a[0]) {
@@ -64,6 +64,7 @@ void do_syscall(Context *c) {
       // Log("open over    x:%d\n",x);
       break;
     case SYS_read: //_read(int fd, void *buf, size_t count)
+      Log("??????????????????????\n");
       c->GPRx=fs_read(a[1], (void *)a[2], a[3]);
       break;
     case SYS_close: //_syscall_(SYS_close, fd, 0, 0)
