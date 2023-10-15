@@ -17,7 +17,7 @@ void do_syscall(Context *c) {
   a[1]=c->GPR2;
   a[2]=c->GPR3;
   a[3]=c->GPR4;
-  // Log("a[0]: %x,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
+  Log("a[0]: %x,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
 //
   // int x;
   switch (a[0]) {
@@ -70,7 +70,6 @@ void do_syscall(Context *c) {
       c->GPRx=fs_close(a[1]);
       break;
     case SYS_lseek: //_lseek(int fd, off_t offset, int whence)
-      Log("lseek\n");
       c->GPRx=fs_lseek(a[1], a[2], a[3]);
       break;
 //
