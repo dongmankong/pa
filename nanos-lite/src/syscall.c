@@ -33,7 +33,7 @@ void do_syscall(Context *c) {
       break;
     //
     case SYS_write:  //_syscall_(SYS_write, fd, buf, count);
-      Log("write\n");
+      // Log("write\n");
       // Log("a[0]: %x,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
       assert(a[1]==1 || a[1]==2);
       char *p=(char *)a[2];
