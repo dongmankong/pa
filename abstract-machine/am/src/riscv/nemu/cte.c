@@ -20,7 +20,7 @@ Context* __am_irq_handle(Context *c) {
       case 0x1:
       case 0x2: //SYS_open
       case 0x3: //SYS_read
-      case 0x4:
+      case 0x4: //SYS_write
       case 0x7: //SYS_close
       case 0x8: //SYS_lseek
       case 0x9: //SYS_brk
