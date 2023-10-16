@@ -23,7 +23,7 @@ Context* __am_irq_handle(Context *c) {
       case 0x7: //SYS_close
       case 0x8: //SYS_lseek
       case 0x9: //SYS_brk
-      case 0x19: //SYS_gettimeofday
+      case 19: //SYS_gettimeofday
         ev.event =EVENT_SYSCALL;
         break;
       // case 0x0:
