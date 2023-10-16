@@ -5,8 +5,7 @@ int main(void) {
   struct timeval tv;
   // struct timezone tz;
   // gettimeofday(&tv, NULL);
-  // __uint64_t ms = 500;
-  int ms=500;
+  __uint64_t ms = 500;
   while (1) {
     printf("ms = %d\n", ms);
     while ((tv.tv_sec * 1000 + tv.tv_usec / 1000) < ms) {
