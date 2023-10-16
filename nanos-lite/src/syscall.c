@@ -80,13 +80,13 @@ void do_syscall(Context *c) {
 
     case SYS_gettimeofday:{ //_syscall_(SYS_gettimeofday, (intptr_t)&tv, (intptr_t)&tz, 0)
       struct timeval* tv = (struct timeval*)a[1];
-      uint64_t us= io_read(AM_TIMER_UPTIME).us;
-      // Log("%d\n",us);
+      uint64_t now= io_read(AM_TIMER_UPTIME).us;
+      // Log("%d\n",now);
       if(tv!=NULL){
-        tv->tv_sec=us/(1000*1000);
-        tv->tv_usec=us%(1000*1000);
+        tv->tv_sec=now/(1000*1000);
+        Log("%d\n",tv->tv_sec);
+        tv->tv_usec=now%(1000*1000);
       }
-
 
       c->GPRx=0;
       break;
