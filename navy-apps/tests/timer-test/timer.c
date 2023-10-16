@@ -4,9 +4,10 @@
 int main(void) {
   struct timeval tv;
   // struct timezone tz;
-  gettimeofday(&tv, NULL);
+  // gettimeofday(&tv, NULL);
   __uint64_t ms = 500;
   while (1) {
+    printf("ms = %d\n", ms);
     while ((tv.tv_sec * 1000 + tv.tv_usec / 1000) < ms) {
       gettimeofday(&tv, NULL);
     }
