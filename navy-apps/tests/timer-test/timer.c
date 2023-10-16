@@ -13,6 +13,8 @@ int main(void) {
       gettimeofday(&tv, NULL);
     }
     ms += 5000;
+    printf("ms = %d\n", ms);
+
     // printf("过了5s\n");
   }
   // printf("ms = %d\n", ms);
