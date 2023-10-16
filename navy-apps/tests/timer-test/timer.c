@@ -8,6 +8,7 @@ int main(void) {
   int ms = 5000;
   printf("%d\n",(tv.tv_sec * 1000 + tv.tv_usec / 1000));
   while (1) {
+    printf("%d\n",(tv.tv_sec * 1000 + tv.tv_usec / 1000));
     while ((tv.tv_sec * 1000 + tv.tv_usec / 1000) < ms) {
     // printf("过了5s\n");
 
