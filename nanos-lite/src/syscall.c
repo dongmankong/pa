@@ -22,7 +22,7 @@ void do_syscall(Context *c) {
   // Log("异常类型为: %x  ,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
 //
   // int x;
-  Log("\033[34m异常类型为: %x\033[34m   ,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
+  // Log("\033[34m异常类型为: %x\033[34m   ,a[1]:%x ,a[2]:%x,a[3]:%x   \n",a[0],a[1],a[2],a[3]);
   switch (a[0]) {
 //my
     case SYS_yield:
@@ -83,7 +83,7 @@ void do_syscall(Context *c) {
       uint64_t now= io_read(AM_TIMER_UPTIME).us;
       if(tv!=NULL){
         tv->tv_sec=now/(1000*1000);
-        Log("%d\n",tv->tv_sec);
+        // Log("%d\n",tv->tv_sec);
         tv->tv_usec=now%(1000*1000);
       }
 
