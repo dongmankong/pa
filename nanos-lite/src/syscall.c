@@ -83,9 +83,9 @@ void do_syscall(Context *c) {
       uint64_t now= io_read(AM_TIMER_UPTIME).us;
       if(tv!=NULL){
         tv->tv_sec=now/(1000*1000);
-        Log("%d\n",tv->tv_sec);
+        // Log("%d\n",tv->tv_sec);
         tv->tv_usec=now%(1000*1000);
-        Log("%d\n", tv->tv_usec);
+        // Log("%d\n", tv->tv_usec);
 
       }
 
