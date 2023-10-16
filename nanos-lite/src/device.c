@@ -14,7 +14,17 @@ static const char *keyname[256] __attribute__((used)) = {
   AM_KEYS(NAME)
 };
 
+//定义的是具体的文件写操作（对于串口来说 也就是stdout标准流这一类
 size_t serial_write(const void *buf, size_t offset, size_t len) {
+//my
+    char *p=(char *)buf;
+    for(int i=0;i<len;++i){
+      putch(p[i]);
+      // Log("%c\n",p[i]);
+      // p++;
+    }
+    return len;
+//
   return 0;
 }
 
