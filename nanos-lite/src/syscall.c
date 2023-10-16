@@ -1,6 +1,6 @@
 #include <common.h>
 #include <sys/time.h>
-#include <time.h>
+// #include <time.h>
 #include "syscall.h"
 //my  a[0] type; a[1] a0;a[2] a1;a[3] a2
 //my
@@ -81,7 +81,7 @@ void do_syscall(Context *c) {
     case SYS_gettimeofday:{ //_syscall_(SYS_gettimeofday, (intptr_t)&tv, (intptr_t)&tz, 0)
       struct timeval* tv = (struct timeval*)a[1];
       uint64_t us= io_read(AM_TIMER_UPTIME).us;
-      Log("%d\n",us);
+      // Log("%d\n",us);
       if(tv!=NULL){
         tv->tv_sec=us/(1000*1000);
         tv->tv_usec=us%(1000*1000);
