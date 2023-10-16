@@ -95,6 +95,8 @@ size_t fs_write(int fd, const void *buf, size_t len){
   // }
   //特殊文件写
   if(file_table[fd].write!=NULL){ //size_t serial_write(const void *buf, size_t offset, size_t len)
+  Log("write\n");
+
     return file_table[fd].write(buf,0,len);
   }
   //普通文件写
