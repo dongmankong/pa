@@ -28,7 +28,7 @@ int NDL_Init(uint32_t flags);
 int main(void) {
   NDL_Init(0);
   while (1) {
-    NDL_GetTicks();
+    printf("当前时间为%d ms\n",NDL_GetTicks());
   }
   return 0;
 }

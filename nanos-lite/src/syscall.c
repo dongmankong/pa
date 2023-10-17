@@ -88,7 +88,6 @@ void do_syscall(Context *c) {
         // Log("%d\n", tv->tv_usec);
 
       }
-
       c->GPRx=0;
       break;
     }

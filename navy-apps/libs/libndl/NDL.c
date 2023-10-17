@@ -14,7 +14,7 @@ static int screen_w = 0, screen_h = 0;
 //my
 struct timeval tv;
 int startTime;
-//
+// 以毫秒为单位返回
 uint32_t NDL_GetTicks() {
 //my
   int ms = startTime+1;
@@ -22,10 +22,10 @@ uint32_t NDL_GetTicks() {
     // while ((tv.tv_sec * 1000 + tv.tv_usec / 1000) < ms) {
       gettimeofday(&tv, NULL);
     // }
-    printf("当前时间为%d ms\n",tv.tv_sec * 1000 + tv.tv_usec/1000-startTime);
+    // printf("当前时间为%d ms\n",tv.tv_sec * 1000 + tv.tv_usec/1000-startTime);
     ms += 1;
   }
-  return 0;
+  return tv.tv_sec * 1000 + tv.tv_usec/1000-startTime;
   // while (1) {
   //   gettimeofday(&tv, NULL);
 
@@ -36,6 +36,7 @@ uint32_t NDL_GetTicks() {
 }
 
 int NDL_PollEvent(char *buf, int len) {
+
   return 0;
 }
 
