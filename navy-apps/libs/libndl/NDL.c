@@ -17,14 +17,14 @@ int startTime;
 // 以毫秒为单位返回
 uint32_t NDL_GetTicks() {
 //my
-  int ms = startTime+1;
-  while (1) {
+  // int ms = startTime+1;
+  // while (1) {
     // while ((tv.tv_sec * 1000 + tv.tv_usec / 1000) < ms) {
       gettimeofday(&tv, NULL);
     // }
     // printf("当前时间为%d ms\n",tv.tv_sec * 1000 + tv.tv_usec/1000-startTime);
-    ms += 1;
-  }
+  //   ms += 1;
+  // }
   return tv.tv_sec * 1000 + tv.tv_usec/1000-startTime;
   // while (1) {
   //   gettimeofday(&tv, NULL);
