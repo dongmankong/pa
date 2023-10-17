@@ -36,7 +36,8 @@ uint32_t NDL_GetTicks() {
 }
 
 int NDL_PollEvent(char *buf, int len) {
-  return read("/dev/events", buf, len);
+  printf("DL_PollEvent\n");
+  return read(evtdev, buf, len);
   // return 0;
 }
 
