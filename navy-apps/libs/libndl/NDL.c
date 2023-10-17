@@ -36,7 +36,7 @@ uint32_t NDL_GetTicks() {
 }
 
 int NDL_PollEvent(char *buf, int len) {
-
+  read("/dev/events", buf, len);
   return 0;
 }
 

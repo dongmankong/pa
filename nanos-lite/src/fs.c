@@ -12,7 +12,7 @@ typedef struct {
   WriteFn write;
 } Finfo;
 
-enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_FB};
+enum {FD_STDIN, FD_STDOUT, FD_STDERR,FD_EVENTS, FD_FB};
 
 //my
 int fs_open(const char *pathname, int flags, int mode);
@@ -22,6 +22,7 @@ size_t fs_lseek(int fd, size_t offset, int whence);
 int fs_close(int fd);
 
 size_t serial_write(const void *buf, size_t offset, size_t len);
+size_t events_read(void *buf, size_t offset, size_t len);
 //
 
 
@@ -47,6 +48,7 @@ static Finfo file_table[] __attribute__((used)) = {
   [FD_STDIN]  = {"stdin", 0, 0, 0,invalid_read, invalid_write},
   [FD_STDOUT] = {"stdout", 0, 0, 0,invalid_read, serial_write},
   [FD_STDERR] = {"stderr", 0, 0, 0,invalid_read, serial_write},
+  [FD_EVENTS] = {"/dev/events", 0, 0, 0,events_read, invalid_write},
 #include "files.h"
 };
 
@@ -76,6 +78,11 @@ size_t fs_read(int fd, void *buf, size_t len){
   //   Log("文件越界\n");
   //   assert(0);
   // }
+    //特殊文件读
+  if(file_table[fd].read!=NULL){ //size_t serial_write(const void *buf, size_t offset, size_t len)
+    return file_table[fd].read(buf,0,len);
+  }
+  //普通文件读
   ramdisk_read(buf,file_table[fd].disk_offset,len);
   file_table[fd].disk_offset+=len;
   // Log("%x",*(uint32_t *)ehdr.e_ident);
