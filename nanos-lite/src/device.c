@@ -33,13 +33,14 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   bool keydown=io_read(AM_INPUT_KEYBRD).keydown;
   int keycode=io_read(AM_INPUT_KEYBRD).keycode;
   if(keycode==AM_KEY_NONE){
+    *(char*)buf = '\0';
     return 0;
   }
   int lenMy=0;
   if(keydown){
-    lenMy=snprintf(buf,len,"kd %s\n",keyname[keycode]);
+    lenMy=sprintf(buf,"kd %s\n",keyname[keycode]);
   }else{
-    lenMy=snprintf(buf,len,"ku %s\n",keyname[keycode]);
+    lenMy=sprintf(buf,"ku %s\n",keyname[keycode]);
   }
   printf("%s\n", buf);
   return lenMy;
