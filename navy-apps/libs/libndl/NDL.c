@@ -22,7 +22,7 @@ uint32_t NDL_GetTicks() {
     while ((tv.tv_sec * 1000 + tv.tv_usec / 1000) < ms) {
       gettimeofday(&tv, NULL);
     }
-    printf("当前时间为%d s\n",tv.tv_sec * 1000 + tv.tv_usec-startTime);
+    printf("当前时间为%d s\n",tv.tv_sec * 1000 + tv.tv_usec/1000-startTime);
     ms += 1;
   }
   return 0;
@@ -83,7 +83,7 @@ int NDL_Init(uint32_t flags) {
 //my
   gettimeofday(&tv, NULL);
   startTime=tv.tv_sec*1000+tv.tv_usec/1000; //ms
-
+  sprintf("%d\n",startTime);
 // 
   return 0;
 }
