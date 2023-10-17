@@ -3,12 +3,28 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+//my
+#include <sys/time.h>
 
+// 
 static int evtdev = -1;
 static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
 
+//my
+struct timeval tv;
+int timeMs;
+//
 uint32_t NDL_GetTicks() {
+//my
+  while (1) {
+    while ((tv.tv_sec * 1000 + tv.tv_usec / 1000) < timeMs) {
+      gettimeofday(&tv, NULL);
+    }
+    timeMs += 5000;
+    printf("过了5s\n");
+  }
+// 
   return 0;
 }
 
@@ -57,6 +73,11 @@ int NDL_Init(uint32_t flags) {
   if (getenv("NWM_APP")) {
     evtdev = 3;
   }
+//my
+  timeMs=0;
+  gettimeofday(&tv, NULL);
+
+// 
   return 0;
 }
 
