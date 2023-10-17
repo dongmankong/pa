@@ -84,7 +84,7 @@ int NDL_Init(uint32_t flags) {
 //my
   gettimeofday(&tv, NULL);
   startTime=tv.tv_sec*1000+tv.tv_usec/1000; //ms
-  printf("开始毫秒为%d\n",startTime);
+  // printf("开始毫秒为%d\n",startTime);
 // 
   return 0;
 }
