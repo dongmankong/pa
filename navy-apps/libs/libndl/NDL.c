@@ -12,11 +12,12 @@ static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
 
 //my
-struct timeval tv;
+// struct timeval tv;
 // int startTime;
 //
 uint32_t NDL_GetTicks() {
 //my
+  struct timeval tv;
   gettimeofday(&tv, NULL);
   int startTime=tv.tv_sec*1000+tv.tv_usec/1000; //ms
   sprintf("aaaaaaaaaaaaaaaaaaaaaaaaa%d\n",startTime);
