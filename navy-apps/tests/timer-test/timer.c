@@ -24,9 +24,9 @@
 //   return 0;
 // }
 uint32_t NDL_GetTicks();
-int NDL_Init(uint32_t flags);
+// int NDL_Init(uint32_t flags);
 int main(void) {
-  NDL_Init(0);
+  // NDL_Init(0);
   while (1) {
     NDL_GetTicks();
   }
