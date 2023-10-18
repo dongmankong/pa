@@ -63,11 +63,20 @@ void NDL_OpenCanvas(int *w, int *h) {
   read(5,buf,2);
   *w=(int)buf[0];
   *h=(int)buf[1];
+
   // printf("%d  %d",*w,*h);
   
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
+//my
+  int N=32;
+  int blockW=w/32;
+  int blockH=h/32;
+  int block_size = blockW * blockH;
+
+  write(fbdev,pixels,N);
+//
 }
 
 void NDL_OpenAudio(int freq, int channels, int samples) {
