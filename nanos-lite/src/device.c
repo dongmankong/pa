@@ -53,7 +53,16 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 }
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-  return 0;
+  //my
+  int width=io_read(AM_GPU_CONFIG).width; //bool present, has_accel; int width, height, vmemsz
+  int height=io_read(AM_GPU_CONFIG).height;
+  int *p=(int *)buf;
+  *p=width;
+  p++;
+  *p=height;
+  return len;
+  //
+  // return 0;
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {

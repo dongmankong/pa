@@ -8,7 +8,7 @@
 
 // 
 static int evtdev = 3;
-static int fbdev = -1;
+static int fbdev = 4;
 static int screen_w = 0, screen_h = 0;
 
 //my
@@ -58,6 +58,13 @@ void NDL_OpenCanvas(int *w, int *h) {
     }
     close(fbctl);
   }
+  // FILE *fp = fopen("/proc/dispinfo", "r");
+  void *buf[2];
+  read(5,buf,2);
+  *w=(int*)buf[0];
+  *h=(int*)buf[1];
+  printf("%d  %d",*w,*h);
+  
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
