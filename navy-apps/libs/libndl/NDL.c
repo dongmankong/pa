@@ -61,9 +61,9 @@ void NDL_OpenCanvas(int *w, int *h) {
   // FILE *fp = fopen("/proc/dispinfo", "r");
   void *buf[2];
   read(5,buf,2);
-  *w=(int*)buf[0];
-  *h=(int*)buf[1];
-  printf("%d  %d",*w,*h);
+  *w=(int)buf[0];
+  *h=(int)buf[1];
+  // printf("%d  %d",*w,*h);
   
 }
 
