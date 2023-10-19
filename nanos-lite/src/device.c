@@ -71,6 +71,11 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
   // int w = io_read(AM_GPU_CONFIG).width / N;
   // int h = io_read(AM_GPU_CONFIG).height / N;
   // int block_size = w * h;
+  // int x=offset%w;
+  // int y=offset/w;
+  // io_write(AM_GPU_FBDRAW, x, y , buf, w, h, false);
+  // int h = io_read(AM_GPU_CONFIG).height / N;
+  // int block_size = w * h;
 
 //
   return 0;

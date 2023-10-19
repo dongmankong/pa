@@ -86,7 +86,9 @@ size_t fs_read(int fd, void *buf, size_t len){
   // }
     //特殊文件读
   if(file_table[fd].read!=NULL){ //size_t serial_write(const void *buf, size_t offset, size_t len)
-    return file_table[fd].read(buf,0,len);
+    int len1=file_table[fd].read(buf,0,len);
+    file_table[fd].disk_offset+=len1;
+    return len1;
   }
   //普通文件读
   ramdisk_read(buf,file_table[fd].disk_offset,len);
@@ -108,7 +110,10 @@ size_t fs_write(int fd, const void *buf, size_t len){
   // }
   //特殊文件写
   if(file_table[fd].write!=NULL){ //size_t serial_write(const void *buf, size_t offset, size_t len)
-    return file_table[fd].write(buf,0,len);
+    int len1=file_table[fd].write(buf,file_table[fd].disk_offset-file_table[fd].start_offset,len);
+    file_table[fd].disk_offset+=len1;
+    return len1;
+    // return file_table[fd].write(buf,0,len);
   }
   //普通文件写
   ramdisk_write(buf,file_table[fd].disk_offset,len);
