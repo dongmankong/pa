@@ -75,7 +75,9 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   for(int i=0;i<h;++i){
     for(int j=0;j<w;++j){
       color_buf[j]=pixels[i*w+j];
+      printf("%d  ",color_buf[j]);
     }
+    printf("\n");
     write(fbdev,(void *)color_buf,w );
   }
   free(color_buf);
