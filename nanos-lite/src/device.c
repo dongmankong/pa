@@ -71,11 +71,11 @@ size_t fb_write(void *buf, size_t offset, size_t len) {
   // int N=32;
   // int width = io_read(AM_GPU_CONFIG).width;
   int w = io_read(AM_GPU_CONFIG).width;
-  int h = io_read(AM_GPU_CONFIG).height;
+  // int h = io_read(AM_GPU_CONFIG).height;
   // int h = io_read(AM_GPU_CONFIG).height/32;
   int x=offset%w;
   int y=offset/w;
-  printf("%d     %d\n",w,h);
+  printf("%d     %d\n",w,len);
   io_write(AM_GPU_FBDRAW, x, y , buf, len, 1, true);
 
   return w;
