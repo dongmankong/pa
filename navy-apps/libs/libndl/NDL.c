@@ -71,7 +71,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 //my
   uint32_t *color_buf = malloc(w*sizeof(uint32_t));
   // fseek(fbdev, 0, SEEK_SET);
-  printf("sssssssssssssssssssssss\n");
+  // printf("sssssssssssssssssssssss\n");
   for(int i=0;i<h;++i){
     for(int j=0;j<w;++j){
       color_buf[j]=pixels[i*w+j];
