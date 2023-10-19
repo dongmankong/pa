@@ -67,15 +67,16 @@ void NDL_OpenCanvas(int *w, int *h) {
   // printf("%d  %d",*w,*h);
   
 }
-
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 //my
-  int N=32;
-  int blockW=w/32;
-  int blockH=h/32;
-  int block_size = blockW * blockH;
-
-  write(fbdev,pixels,N);
+  uint32_t *color_buf = malloc(w*sizeof(uint32_t));
+  fseek(fbdev, 0, SEEK_SET);
+  for(int i=0;i<h;++i){
+    for(int j=0;j<w;++j){
+      color_buf[j]=pixels[i*w+j];
+    }
+    write(fbdev,(void *)color_buf,w);
+  }
 //
 }
 
