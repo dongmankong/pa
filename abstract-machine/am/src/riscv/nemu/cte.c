@@ -16,7 +16,7 @@ Context* __am_irq_handle(Context *c) {
         break;
         //
       case 0x0: //SYS_exit
-      case 0x1:
+      case 0x1: //SYS_yield
       case 0x2: //SYS_open
       case 0x3: //SYS_read
       case 0x4: //SYS_write
