@@ -5,8 +5,8 @@ int main() {
   FILE *fp = fopen("/share/files/num", "r+");
   // FILE *fp = fopen("/bin/hello", "r+");
 
-  // assert(fp);
-  assert(0);
+  assert(fp);
+  // assert(0);
 
 
   fseek(fp, 0, SEEK_END);
