@@ -2,9 +2,9 @@
 #include <assert.h>
 
 int main() {
-  // FILE *fp = fopen("/share/files/num", "r+");
+  FILE *fp = fopen("/share/files/num", "r+");
   // FILE *fp = fopen("/bin/hello", "r+");
-  FILE *fp = fopen("/dev/fb", "wr+");
+  // FILE *fp = fopen("/dev/fb", "wr+");
 
   assert(fp);
   // assert(0);
