@@ -61,8 +61,11 @@ void NDL_OpenCanvas(int *w, int *h) {
   // FILE *fp = fopen("/proc/dispinfo", "r");
   void *buf[2];
   read(5,buf,2);
-  *w=(int)buf[0];
-  *h=(int)buf[1];
+  if(*w==0 && *h==0){
+    *w=(int)buf[0];
+    *h=(int)buf[1];
+  }
+
 
   // printf("%d  %d",*w,*h);
   
@@ -70,8 +73,8 @@ void NDL_OpenCanvas(int *w, int *h) {
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 //my
   // uint32_t *color_buf = malloc(w*sizeof(uint32_t));
-  FILE *fp = fopen("/dev/events", "r+");
-  fseek(fbdev, 0, SEEK_SET);
+  // FILE *fp = fopen("/dev/events", "w+");
+  // fseek(fbdev, 0, SEEK_SET);
   // // printf("sssssssssssssssssssssss\n");
   // for(int i=0;i<h;++i){
   //   for(int j=0;j<w;++j){
