@@ -85,14 +85,17 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   void *buf[2];
   read(5,buf,2);
   int wScreen=(int)buf[0];
-  int hScreen=(int)buf[1];
+  // int hScreen=(int)buf[1];
   
-  printf("sssssssssss%d %d\n",wScreen,hScreen);
-  printf("%d\n",y*wScreen+x);
+  // printf("sssssssssss%d %d\n",wScreen,hScreen);
+  // printf("%d\n",y*wScreen+x);
+  for(int i=0;i<y;++i){
+    write(fbdev,&pixels[i*w],-wScreen);
+  }
+  write(fbdev,&pixels[w],-x);
   for(int i=0;i<h;++i){
     write(fbdev,&pixels[i*w],w );
   }
-  fseek((FILE *)fbdev,0,SEEK_SET);
   // free(color_buf);
 //
 }
