@@ -92,7 +92,11 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   for(int i=0;i<y;++i){
     write(fbdev,&pixels[i*w],-wScreen);
   }
+  printf("%d\n",x);
+
   write(fbdev,&pixels[w],-x);
+  write(fbdev,&pixels[w],-x);
+  
   for(int i=0;i<h;++i){
     write(fbdev,&pixels[i*w],w );
   }
